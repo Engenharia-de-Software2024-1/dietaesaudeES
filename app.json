@@ -1,4 +1,27 @@
 {
-  "name": "projetoEs",
-  "displayName": "projetoEs"
+  "expo": {
+    "name": "supportive-blue-edamame",
+    "slug": "snack-9ffa9b77-8f5a-4060-8d58-077cf79e02d9",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#ffffff"
+      }
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    }
+  }
 }
