@@ -1,11 +1,16 @@
-# Sample Snack app
+**Nome do sistema:**
 
-Open the `App.js` file to start writing some code. You can preview the changes directly on your phone or tablet by scanning the **QR code** or use the iOS or Android emulators. When you're done, click **Save** and share the link!
+NuTraining
 
-When you're ready to see everything that Expo provides (or if you want to use your own editor) you can **Download** your project and use it with [expo cli](https://docs.expo.dev/get-started/installation/#expo-cli)).
+**Introdução:**
 
-All projects created in Snack are publicly available, so you can easily share the link to this project via link, or embed it on a web page with the `<>` button.
 
-If you're having problems, you can tweet to us [@expo](https://twitter.com/expo) or ask in our [forums](https://forums.expo.dev/c/expo-dev-tools/61) or [Discord](https://chat.expo.dev/).
+**Justificativa:** 
 
-Snack is Open Source. You can find the code on the [GitHub repo](https://github.com/expo/snack).
+A busca por um estilo de vida saudável tem sido uma prioridade na vida de muitas pessoas. A conscientização pela importância de se manter saudável é crescente e tem levado essas pessoas a se interessar mais por atividades físicas e por manter uma dieta saudável. Um dos desafios que esses indivíduos enfrentam, é a ausência de ferramentas eficazes e personalizadas que façam o monitoramento e progresso de forma integrada e contínua. 
+A partir disso, surge a ideia de desenvolver um aplicativo que permite que usuários possam acompanhar e gerenciar as suas atividades diárias. O aplicativo será uma ferramenta para monitorar a dieta, os exercícios e o progresso do usuário de uma forma mais rápida e fácil. Além disso, o aplicativo irá exibir gráficos e estatísticas que mostram as atividades realizadas durante o dia e o seu desempenho, proporcionando a ele uma visão mais holística da sua evolução e comprovações das atividades concluídas.
+
+**Problemática:**
+
+
+**Objetivos dos projeto:**
