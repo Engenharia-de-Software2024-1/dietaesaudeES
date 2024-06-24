@@ -4,6 +4,7 @@ NuTraining
 
 **Introdução:**
 
+Cuidar da saúde tornou-se uma prioridade essencial em um mundo cada vez mais acelerado e repleto de compromissos. Com o aumento das doenças relacionadas ao estilo de vida, como obesidade, diabetes e hipertensão, manter uma alimentação balanceada e uma rotina de exercícios físicos não é apenas uma questão estética, mas uma necessidade para garantir bem-estar e longevidade. Nesse contexto, a tecnologia tem se mostrado uma aliada poderosa, especialmente através de aplicativos que mapeiam a dieta e os treinos, oferecendo feedback contínuo sobre o progresso. Estes aplicativos ajudam a definir objetivos claros e tangíveis, assegurando que a jornada rumo a uma vida mais saudável seja estruturada e focada.
 
 **Justificativa:** 
 
@@ -12,8 +13,11 @@ A partir disso, surge a ideia de desenvolver um aplicativo que permite que usuá
 
 **Problemática:**
 
+A problemática deste projeto, gira em torno da falta de um aplicativo que permita que os usuários possam monitorar seu desempenho em atividade física e dieta, de forma rápida, com apenas um clique. Visualizar o seu progresso por meio de gráficos detalhados é uma solução inovadora e necessária. Além disso, a ausência de um sistema de monitoramento e recompensa eficaz dificulta o progresso contínuo e a percepção dos benefícios alcançados. Nesse contexto, esse aplicativo atenderá a uma demanda crescente, contribuindo para melhorar a qualidade de vida e gerenciar a vida saudável e fitness dos seus usuários.
 
 **Objetivos:**
+
+
 
 
 **Clientes em potencial:**
