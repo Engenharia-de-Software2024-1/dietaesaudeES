@@ -14,3 +14,10 @@ A partir disso, surge a ideia de desenvolver um aplicativo que permite que usuá
 
 
 **Objetivos dos projeto:**
+
+
+**Cliente**
+Williams - Professor UPE (Cliente principal)
+Nutricionista 
+Nutrólogo 
+Profissional de educação física.
