@@ -16,8 +16,10 @@ A partir disso, surge a ideia de desenvolver um aplicativo que permite que usuá
 A problemática deste projeto, gira em torno da falta de um aplicativo que permita que os usuários possam monitorar seu desempenho em atividade física e dieta, de forma rápida, com apenas um clique. Visualizar o seu progresso por meio de gráficos detalhados é uma solução inovadora e necessária. Além disso, a ausência de um sistema de monitoramento e recompensa eficaz dificulta o progresso contínuo e a percepção dos benefícios alcançados. Nesse contexto, esse aplicativo atenderá a uma demanda crescente, contribuindo para melhorar a qualidade de vida e gerenciar a vida saudável e fitness dos seus usuários.
 
 **Objetivos:**
-
-
+Facilitar a comunicação entre usuários, profissionais de educação física e nutricionistas.
+Permitir que os usuários sejam monitorados em relação a sua dieta e o progresso nas atividades físicas.
+Fornecer acompanhamento personalizado baseado em dados coletados durante a rotina do usuário.
+Permitir a integração entre rotinas de exercícios físicos e a dietas de usuários num mesmo aplicativo.
 
 
 **Clientes em potencial:**
