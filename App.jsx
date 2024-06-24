@@ -1,9 +1,8 @@
-import { Router } from './src/routes/Router'
-
+import SetUpScreen from "./src/screen/SetUpScreen"
 
 const App = () => {
   return (
-    <Router/>
+    <SetUpScreen/>
   )
 }
 
