@@ -13,7 +13,7 @@ A partir disso, surge a ideia de desenvolver um aplicativo que permite que usuá
 **Problemática:**
 
 
-**Objetivos dos projeto:**
+**Objetivos:**
 
 
 **Clientes em potencial:**
