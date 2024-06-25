@@ -18,8 +18,9 @@ A problemática deste projeto, gira em torno da falta de um aplicativo que permi
 **Objetivos:**
 Facilitar a comunicação entre usuários, profissionais de educação física e nutricionistas.
 Permitir que os usuários sejam monitorados em relação a sua dieta e o progresso nas atividades físicas.
+Acompanhar evolução e dedicação dos usuários em relação a sua dieta e treinos.
 Fornecer acompanhamento personalizado baseado em dados coletados durante a rotina do usuário.
-Permitir a integração entre rotinas de exercícios físicos e a dietas de usuários num mesmo aplicativo.
+Permitir a integração entre rotinas de exercícios físicos e a dietas de usuários em um mesmo aplicativo.
 
 
 **Clientes em potencial:**
