@@ -1,28 +1,47 @@
-import { Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import { FlatList, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React, { useState } from 'react'
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import Fontisto from 'react-native-vector-icons/Fontisto';
-import AntDesign from 'react-native-vector-icons/AntDesign';
-import LinearGradient from 'react-native-linear-gradient';
-import { useNavigation } from '@react-navigation/native';
-
+import { useTasksDatabase } from '../../database/useTasksDatabase';
+import { Task } from '../components/Task';
+import AntDesign from '@expo/vector-icons/AntDesign';
+import { Link } from 'expo-router';
 const HomeScreen = () => {
 
-    const [selectedRadio, setSelectedRadio] = useState(0);
+    const [selectedRadio, setSelectedRadio] = useState('dieta');
+    const [tasks, setTasks] = useState([])
 
+    const db = useTasksDatabase()
+
+    async function list(){
+        try{
+            const response = await db.findAllTasks(selectedRadio)
+            setTasks(response)
+        }catch(error){
+            console.log(error)
+        }
+    }
 
     return (
         <View style={styles.container}>
             <Text style={styles.routineTitle}>Rotina</Text>
             <View style={styles.routineButtonsContainer}>
-                <TouchableOpacity onPress={() => setSelectedRadio(0)}>
-                    <Text style={selectedRadio == 0 ? styles.selectedButton : styles.routineButtonText}>Dieta</Text>
+                <TouchableOpacity onPress={() => {setSelectedRadio('dieta'); list();}}>
+                    <Text style={selectedRadio == 'dieta'? styles.selectedButton : styles.routineButtonText}>Dieta</Text>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={() => setSelectedRadio(1)}>
-                    <Text style={selectedRadio == 1 ? styles.selectedButton : styles.routineButtonText}>Treino</Text>
+                <TouchableOpacity onPress={() => {setSelectedRadio('treino'); list();}}>
+                    <Text style={selectedRadio == 'treino' ? styles.selectedButton : styles.routineButtonText}>Treino</Text>
                 </TouchableOpacity>
             </View>
+            <Link href='screen/SetUpScreen'> 
+                <AntDesign name='pluscircle' style={styles.addIcon} size={40} color="blue"/>
+            </Link>
+            <View>
+                {tasks.map((item) =>{
+                    return <Text>{item.task_type} - {item.quantity}</Text>
+                })}
+            </View>
+
         </View>
+        
     )
 }
 
@@ -60,6 +79,11 @@ const styles = StyleSheet.create({
         textAlign: "center",
         fontSize: 18,
         color: "#262626"
+    },
+    addIcon:{
+        alignSelf: "flex-end",
+        marginRight: 20,
+        marginTop: 20,
     },
     inputContainer:{
         backgroundColor: "#FFFFFF",

@@ -1,4 +1,4 @@
-import {StyleSheet, Text, TouchableOpacity, View, Image } from 'react-native'
+/*import {StyleSheet, Text, TouchableOpacity, View, Image } from 'react-native'
 import React from 'react'
 import { useState } from 'react';
 import AntDesign from 'react-native-vector-icons/AntDesign';
@@ -87,3 +87,4 @@ const styles = StyleSheet.create({
         marginTop: 10,
     }
 });
+*/

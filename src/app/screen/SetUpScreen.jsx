@@ -1,13 +1,32 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, TouchableOpacity, Switch, ScrollView, StyleSheet } from 'react-native';
+import { View, Text, TextInput, Button, TouchableOpacity, Switch, ScrollView, StyleSheet, Alert } from 'react-native';
+import { useTasksDatabase } from '../../database/useTasksDatabase';
+import { Link } from 'expo-router';
 
-const SetUpScreen = () => {
+
+export default Page = () => {
   const [selectedDays, setSelectedDays] = useState([]);
   const [activityCount, setActivityCount] = useState(1);
   const [notificationsEnabled, setNotificationsEnabled] = useState(false);
   const [notificationTimes, setNotificationTimes] = useState([]);
-
+  const [taskType, setTaskType] = useState('treino')
   const days = ['Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sábado', 'Domingo'];
+
+  // funcoes do banco
+  const db = useTasksDatabase();
+
+  async function create(){
+
+    try{
+
+      const response = await db.create({
+        task_type: taskType, 
+        quantity: activityCount
+      })
+
+      Alert.alert('Produto: ' + response.insertedRowId + 'adicionado')
+    }catch(error){console.log(error)}
+  }
 
   const toggleDay = (day) => {
     setSelectedDays((prev) =>
@@ -21,14 +40,15 @@ const SetUpScreen = () => {
 
   return (
     <ScrollView style={styles.container}>
-      <TouchableOpacity style={styles.backButton}>
-        <Text>Voltar</Text>
-      </TouchableOpacity>
+      <Link href='screen/HomeScreen'> 
+       Voltar
+      </Link>
       <View style={styles.buttonsContainer}>
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity style={taskType == 'treino' ? styles.selectedTaskTypeButton : styles.taskTypeButton} onPress={() => {setTaskType('treino')
+        }}>
           <Text>Treino</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity style={taskType == 'dieta' ? styles.selectedTaskTypeButton : styles.taskTypeButton} onPress={() => setTaskType('dieta')}>
           <Text>Dieta</Text>
         </TouchableOpacity>
       </View>
@@ -78,7 +98,7 @@ const SetUpScreen = () => {
           <Button title="+ Adicionar" onPress={addNotificationTime} />
         </>
       )}
-      <Button title="SALVAR" onPress={() => {}} />
+      <Button title="SALVAR" onPress={create} />
     </ScrollView>
   );
 };
@@ -97,9 +117,17 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     marginBottom: 16,
   },
-  button: {
+  taskTypeButton: {
     flex: 1,
     backgroundColor: '#d3bce3',
+    padding: 16,
+    margin: 8,
+    alignItems: 'center',
+    borderRadius: 8,
+  },
+  selectedTaskTypeButton: {
+    flex: 1,
+    backgroundColor: '#4faaff',
     padding: 16,
     margin: 8,
     alignItems: 'center',
@@ -154,5 +182,3 @@ const styles = StyleSheet.create({
     marginVertical: 4,
   },
 });
-
-export default SetUpScreen;
