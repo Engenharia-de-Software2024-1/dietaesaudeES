@@ -6,12 +6,12 @@ export function useTasksDatabase(){
 
     async function create(data){
         const statement = await database.prepareAsync(
-            "INSERT INTO tasks(task_type, quantity) VALUES ($task_type,$quantity)"
+            "INSERT INTO tasks(task_type, task_date) VALUES ($task_type,$task_date)"
         )
         try{
             const result = await statement.executeAsync({
                 $task_type: data.task_type,
-                $quantity: data.quantity
+                $task_date: data.task_date
             })
 
             const insertedRowId = result.lastInsertRowId.toLocaleString()
@@ -26,9 +26,14 @@ export function useTasksDatabase(){
 
     async function findAllTasks(taskType){
         try{
-            const query = "SELECT * FROM tasks WHERE task_type = ?"
+            const query = 
+            `SELECT strftime('%m-%d', task_date) AS label, COUNT(*) AS value
+             FROM tasks
+             WHERE task_type = ?
+             GROUP BY task_date;
+            `
             const response = await database.getAllAsync(query,`${taskType}`)
-
+            console.log(response)
             return response
         }catch(error){
             throw error

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, Button, TouchableOpacity, Switch, ScrollView, StyleSheet, Alert } from 'react-native';
+import * as FileSystem from 'expo-file-system';
 import { useTasksDatabase } from '../../database/useTasksDatabase';
 import { Link } from 'expo-router';
 
@@ -21,7 +22,7 @@ export default Page = () => {
 
       const response = await db.create({
         task_type: taskType, 
-        quantity: activityCount
+        task_date: new Date().toLocaleDateString()
       })
 
       Alert.alert('Produto: ' + response.insertedRowId + 'adicionado')
@@ -40,7 +41,7 @@ export default Page = () => {
 
   return (
     <ScrollView style={styles.container}>
-      <Link href='screen/HomeScreen'> 
+      <Link href='screen/HomeScreen' style={styles.backButton}> 
        Voltar
       </Link>
       <View style={styles.buttonsContainer}>
@@ -110,7 +111,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#f2f2f2',
   },
   backButton: {
-    marginBottom: 16,
+    marginVertical: 15,
   },
   buttonsContainer: {
     flexDirection: 'row',

@@ -4,6 +4,7 @@ import { useTasksDatabase } from '../../database/useTasksDatabase';
 import { Task } from '../components/Task';
 import AntDesign from '@expo/vector-icons/AntDesign';
 import { Link } from 'expo-router';
+import HomeChart from '../components/HomeChart';
 const HomeScreen = () => {
 
     const [selectedRadio, setSelectedRadio] = useState('dieta');
@@ -31,15 +32,12 @@ const HomeScreen = () => {
                     <Text style={selectedRadio == 'treino' ? styles.selectedButton : styles.routineButtonText}>Treino</Text>
                 </TouchableOpacity>
             </View>
-            <Link href='screen/SetUpScreen'> 
+            <Link href='screen/SetUpScreen' style={styles.addTaskContainer}> 
                 <AntDesign name='pluscircle' style={styles.addIcon} size={40} color="blue"/>
             </Link>
-            <View>
-                {tasks.map((item) =>{
-                    return <Text>{item.task_type} - {item.quantity}</Text>
-                })}
+            <View style={styles.chartContainer}>
+                <HomeChart selectedFilter={selectedRadio} style={styles.chart}/>
             </View>
-
         </View>
         
     )
@@ -57,7 +55,7 @@ const styles = StyleSheet.create({
         fontSize: 34,
         fontWeight: "500",
         color: "black",
-        marginVertical: 15
+        marginTop: 50,
     },
     routineButtonsContainer:{
         flexDirection: "row",
@@ -75,13 +73,11 @@ const styles = StyleSheet.create({
         marginHorizontal: 10,
         color: "blue"
     },
-    loginText:{
-        textAlign: "center",
-        fontSize: 18,
-        color: "#262626"
+    addTaskContainer:{
+        alignItems: "flex-end",
+        margin: 10
     },
     addIcon:{
-        alignSelf: "flex-end",
         marginRight: 20,
         marginTop: 20,
     },
@@ -95,43 +91,10 @@ const styles = StyleSheet.create({
         alignItems: "center",
         height: 40
     },
-    inputIcon:{
-        marginLeft: 15,
-        marginRight: 5
+    chartContainer:{
+        backgroundColor: '#999999',
+        borderRadius: 10,
+        padding: 15,
+        margin: 20,
     },
-    textInput:{
-        flex: 1
-    },
-    forgotPassword:{
-        color: "#262626",
-        textAlign: "right",
-        width:"90%",
-        fontSize: 15
-    },
-    loginButtonContainer:{
-        flexDirection: "row",
-        marginTop: 30,
-        width: "92%",
-        justifyContent: "flex-end",
-        elevation: 10
-    },
-    loginButtonText:{
-        color: "#262626",
-        fontSize: 25,
-        fontWeight: "bold"
-    },
-    linearGradient:{
-        height: 34,
-        width:56,
-        borderRadius: 17,
-        alignItems: "center",
-        justifyContent: "center",
-        marginHorizontal: 10
-    },
-    registerText:{
-        color: "#262626",
-        textAlign: "center",
-        fontSize: 18,
-        marginTop: 60
-    }
 });
