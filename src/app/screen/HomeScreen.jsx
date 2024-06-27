@@ -1,20 +1,23 @@
-import { FlatList, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React, { useState } from 'react'
 import { useTasksDatabase } from '../../database/useTasksDatabase';
-import { Task } from '../components/Task';
 import AntDesign from '@expo/vector-icons/AntDesign';
 import { Link } from 'expo-router';
 import HomeChart from '../components/HomeChart';
+import HomeFilters from '../components/HomeFIlters';
 const HomeScreen = () => {
 
     const [selectedRadio, setSelectedRadio] = useState('dieta');
-    const [tasks, setTasks] = useState([])
+    const [dayValue, setDayValue] = useState(null);
+    const [monthValue, setMonthValue] = useState(null);
+    const [yearValue, setYearValue] = useState(null);
 
     const db = useTasksDatabase()
 
     async function list(){
         try{
             const response = await db.findAllTasks(selectedRadio)
+            console.log([dayValue, monthValue,yearValue])
             setTasks(response)
         }catch(error){
             console.log(error)
@@ -35,8 +38,10 @@ const HomeScreen = () => {
             <Link href='screen/SetUpScreen' style={styles.addTaskContainer}> 
                 <AntDesign name='pluscircle' style={styles.addIcon} size={40} color="blue"/>
             </Link>
+            <HomeFilters dayValue={dayValue} monthValue={monthValue} yearValue={yearValue} 
+                         setDay={setDayValue} setMonth={setMonthValue} setYear={setYearValue}/>
             <View style={styles.chartContainer}>
-                <HomeChart selectedFilter={selectedRadio} style={styles.chart}/>
+                <HomeChart selectedFilter={selectedRadio} taskDay={dayValue} taskMonth={monthValue} style={styles.chart}/>
             </View>
         </View>
         

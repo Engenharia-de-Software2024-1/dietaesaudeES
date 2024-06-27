@@ -12,7 +12,7 @@ export default HomeChart = (props) => {
     
     async function list(){
         try{
-            const response = await db.findAllTasks(props.selectedFilter)
+            const response = await db.findAllTasks(props.selectedFilter, props.taskMonth,props.taskDay)
             console.log(response)
             setData(response)
         }catch(error){
@@ -22,7 +22,7 @@ export default HomeChart = (props) => {
 
     useEffect(() =>{
         list()
-    },[props.selectedFilter])
+    },[props.selectedFilter,props.taskMonth,props.taskDay])
     
 
     return <LineChart data={data} width={250} />;

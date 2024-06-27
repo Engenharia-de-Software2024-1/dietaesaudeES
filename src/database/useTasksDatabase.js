@@ -24,15 +24,17 @@ export function useTasksDatabase(){
         }
     }
 
-    async function findAllTasks(taskType){
+    async function findAllTasks(taskType, taskMonth, taskDay){
         try{
             const query = 
-            `SELECT strftime('%m-%d', task_date) AS label, COUNT(*) AS value
-             FROM tasks
-             WHERE task_type = ?
-             GROUP BY task_date;
+            `SELECT strftime('%m', task_date) AS month, strftime('%d', task_date) AS day, COUNT(*) AS value
+            FROM tasks
+            WHERE task_type = ?
+            AND (? IS NULL OR strftime('%m', task_date) = ?)
+            AND (? IS NULL OR strftime('%d', task_date) = ?)
+            GROUP BY month, day;
             `
-            const response = await database.getAllAsync(query,`${taskType}`)
+            const response = await database.getAllAsync(query,[taskType, taskMonth,taskMonth, taskDay,taskDay])
             console.log(response)
             return response
         }catch(error){
