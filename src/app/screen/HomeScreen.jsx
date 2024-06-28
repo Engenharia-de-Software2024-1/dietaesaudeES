@@ -3,8 +3,10 @@ import React, { useState } from 'react'
 import { useTasksDatabase } from '../../database/useTasksDatabase';
 import AntDesign from '@expo/vector-icons/AntDesign';
 import { Link } from 'expo-router';
-import HomeChart from '../components/HomeChart';
-import HomeFilters from '../components/HomeFIlters';
+import HomeChart from '../components/HomeScreen/HomeChart';
+import HomeFilters from '../components/HomeScreen/HomeFilters';
+import TaskOptions from '../components/HomeScreen/TaskOptions';
+
 const HomeScreen = () => {
 
     const [selectedRadio, setSelectedRadio] = useState('dieta');
@@ -27,16 +29,9 @@ const HomeScreen = () => {
     return (
         <View style={styles.container}>
             <Text style={styles.routineTitle}>Rotina</Text>
-            <View style={styles.routineButtonsContainer}>
-                <TouchableOpacity onPress={() => {setSelectedRadio('dieta'); list();}}>
-                    <Text style={selectedRadio == 'dieta'? styles.selectedButton : styles.routineButtonText}>Dieta</Text>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => {setSelectedRadio('treino'); list();}}>
-                    <Text style={selectedRadio == 'treino' ? styles.selectedButton : styles.routineButtonText}>Treino</Text>
-                </TouchableOpacity>
-            </View>
+            <TaskOptions selected={selectedRadio} setSelected={setSelectedRadio} onPress={list}/>
             <Link href='screen/SetUpScreen' style={styles.addTaskContainer}> 
-                <AntDesign name='pluscircle' style={styles.addIcon} size={40} color="blue"/>
+                <AntDesign name='pluscircle' style={styles.addIcon} size={40} color="#3d5a80"/>
             </Link>
             <HomeFilters dayValue={dayValue} monthValue={monthValue} yearValue={yearValue} 
                          setDay={setDayValue} setMonth={setMonthValue} setYear={setYearValue}/>

@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { LineChart } from "react-native-gifted-charts";
-import { useTasksDatabase } from "../../database/useTasksDatabase";
+import { useTasksDatabase } from "../../../database/useTasksDatabase";
 
 
 export default HomeChart = (props) => {
 
-    const dados = [{label:'6/26/2024', value: 31,}, {value: 30}, {value: 26}, {value: 40}];
+    const dados = [{label: '30/09', value: 7,},{label: '10/09', value: 1}, {label: '03/09', value: 5}]
     const [data, setData] = useState([]);
     const db = useTasksDatabase();
     
@@ -14,7 +14,12 @@ export default HomeChart = (props) => {
         try{
             const response = await db.findAllTasks(props.selectedFilter, props.taskMonth,props.taskDay)
             console.log(response)
-            setData(response)
+
+            const formattedResponse = response.map( item=>({
+                value: item.value,
+                label: `${item.day}/${item.month}`
+            }));
+            setData(formattedResponse)
         }catch(error){
             console.log(error)
         }
@@ -25,6 +30,6 @@ export default HomeChart = (props) => {
     },[props.selectedFilter,props.taskMonth,props.taskDay])
     
 
-    return <LineChart data={data} width={250} />;
+    return <LineChart data={data} color1={'#98c1d9'} dataPointsColor1="#3d5a80" color2={'green'} data2={dados} width={250} curved isAnimated />;
 
 };

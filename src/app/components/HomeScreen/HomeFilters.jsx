@@ -1,7 +1,7 @@
 import React from 'react'
 import { View, StyleSheet } from 'react-native'
 import Dropdown from './Dropdown'
-import { dayOptions, monthOptions, yearOptions } from './filtersData'
+import { dayOptions, monthOptions, yearOptions } from '../../utils/filtersData'
 
 function HomeFilters({dayValue,monthValue,yearValue,setDay,setMonth,setYear}) {
     

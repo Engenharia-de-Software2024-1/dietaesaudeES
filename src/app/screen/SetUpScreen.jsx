@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, Button, TouchableOpacity, Switch, ScrollView, StyleSheet, Alert } from 'react-native';
-import * as FileSystem from 'expo-file-system';
 import { useTasksDatabase } from '../../database/useTasksDatabase';
 import { Link } from 'expo-router';
 
