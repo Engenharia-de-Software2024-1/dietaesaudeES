@@ -30,6 +30,6 @@ const styles = StyleSheet.create({
     selectedButton:{
         fontSize: 18,
         marginHorizontal: 10,
-        color: "blue"
+        color: "#118ab2"
     },
 });
