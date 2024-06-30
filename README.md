@@ -28,3 +28,6 @@ A problemática deste projeto, gira em torno da falta de um aplicativo que permi
 * Nutricionista 
 * Nutrólogo 
 * Profissional de Educação Física.
+
+**Requisitos funcionais do produto:**
+
