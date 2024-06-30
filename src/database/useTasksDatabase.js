@@ -42,5 +42,28 @@ export function useTasksDatabase(){
         }
     }
 
-    return {create, findAllTasks}
+    async function findEachTask(taskType, taskDate){
+        try{
+            const query = 
+            `SELECT *FROM tasks
+             WHERE task_type = ?
+             AND task_date = ?
+            `
+            const response = await database.getAllAsync(query,[taskType, taskDate])
+            console.log(response)
+            return response
+        }catch(error){
+            throw error
+        }
+    }
+
+    async function remove(id){
+        try {
+            await database.execAsync("DELETE FROM tasks WHERE id = " + id)
+        } catch (error) {
+            throw error
+        }
+    }
+
+    return {create, findAllTasks, findEachTask, remove}
 }

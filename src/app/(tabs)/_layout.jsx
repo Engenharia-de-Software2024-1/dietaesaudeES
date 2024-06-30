@@ -4,7 +4,16 @@ import { Tabs } from 'expo-router';
 
 export default function TabLayout() {
   return (
-    <Tabs screenOptions={{ tabBarActiveTintColor: 'blue',tabBarInactiveTintColor:"#262626", headerShown: false }}>
+    <Tabs screenOptions={
+      { 
+      tabBarActiveTintColor: 'blue',
+      tabBarInactiveTintColor:"#fff", 
+      headerShown: false,
+      tabBarStyle:{
+        backgroundColor: "#000",
+      }
+    }
+      }>
       <Tabs.Screen
         name="index"
         options={{
@@ -32,12 +41,7 @@ export default function TabLayout() {
           href: null
         }}
       />
-      <Tabs.Screen
-        name="FrequencyChartScreen"
-        options={{
-          href: null
-        }}
-      />
+      
     </Tabs>
   );
 }

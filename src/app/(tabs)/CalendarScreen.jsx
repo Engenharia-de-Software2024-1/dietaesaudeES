@@ -1,250 +1,138 @@
-import React, { useState } from 'react';
-import { View, StyleSheet, Text, TouchableOpacity, ScrollView, Modal, TextInput, Button } from 'react-native';
-import { LinearGradient } from 'expo-linear-gradient';
-import { Ionicons } from '@expo/vector-icons';
+import React, { useState, useEffect} from 'react';
+import { View, Text, StyleSheet, TouchableOpacity, FlatList } from 'react-native';
+import { Calendar, LocaleConfig } from 'react-native-calendars';
+import Icon from 'react-native-vector-icons/Ionicons';
+import TaskOptions from '../components/HomeScreen/TaskOptions';
+import { useTasksDatabase } from '../../database/useTasksDatabase';
+import TaskComponent from '../components/CalendarScreen/taskComponent';
 
-const initialMonthData = {
-  '2024-05-01': [{ notes: 'T', color: '#FF6347' }],
-  '2024-05-02': [{ notes: 'D', color: '#32CD32' }],
-  '2024-05-03': [{ notes: 'C', color: '#1E90FF' }],
-  '2024-05-04': [{ notes: 'X', color: '#FFD700' }],
-  // Alterar variavel para adicionar informacoes depois
-};
+export default function TrainingScreen() {
+  const [selectedDate, setSelectedDate] = useState(new Date());
+  const [selectedTaskOption, setSelectedTaskOption] = useState('dieta')
+  const [tasks, setTasks] = useState([])
 
-const MyCalendarApp = () => {
-  const [selectedDate, setSelectedDate] = useState(null);
-  const [viewType, setViewType] = useState('treino'); 
-  const [currentMonth, setCurrentMonth] = useState(newDate().getMonth()); 
-  const [currentYear, setCurrentYear] = useState(newDate().getFullYear());
-  const [monthData, setMonthData] = useState(initialMonthData);
-  const [isModalVisible, setIsModalVisible] = useState(false);
-  const [taskText, setTaskText] = useState('');
+  const db = useTasksDatabase();
 
-  const handleDatePress = (date) => {
-    setSelectedDate(date);
-    setIsModalVisible(true);
+  LocaleConfig.locales['pt'] = {
+    monthNames: [
+      'Janeiro',
+      'Fevereiro',
+      'Março',
+      'Abril',
+      'Maio',
+      'Junho',
+      'Julho',
+      'Agosto',
+      'Setembro',
+      'Outubro',
+      'Novembro',
+      'Dezembro'
+    ],
+    monthNamesShort: ['Jan.', 'Fev.', 'Mar.', 'Abr.', 'Mai.', 'Jun.', 'Jul.', 'Ago.', 'Set.', 'Out.', 'Nov.', 'Dez.'],
+    dayNames: ['Domingo', 'Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sábado'],
+    dayNamesShort: ['Dom.', 'Seg.', 'Ter.', 'Qua.', 'Qui.', 'Sex.', 'Sáb.'],
+    today: 'Hoje'
   };
+  LocaleConfig.defaultLocale = 'pt';
 
-  const renderDay = (date) => {
-    const dayData = monthData[date] || [];
-    return (
-      <TouchableOpacity key={date} style={styles.day} onPress={() => handleDatePress(date)}>
-        <Text style={styles.dayText}>{new Date(date).getDate()}</Text>
-        {dayData.map((task, index) => (
-          <Text key={index} style={{ ...styles.dayNotes, backgroundColor: task.color }}>{task.notes}</Text>
-        ))}
-      </TouchableOpacity>
-    );
-  };
-
-  const renderCalendar = () => {
-    const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate(); 
-    const startDayOfWeek = new Date(currentYear, currentMonth, 1).getDay(); 
-    const days = [];
-    for (let i = 0; i < startDayOfWeek; i++) {
-      days.push(<View key={`empty-${i}`} style={styles.day} />);
+  
+  async function list(){
+    try{
+        const response = await db.findEachTask(selectedTaskOption,selectedDate.toString())
+        setTasks(response)
+    }catch(error){
+        console.log(error)
     }
-    for (let i = 1; i <= daysInMonth; i++) {
-      const date = `${currentYear}-${(currentMonth + 1).toString().padStart(2, '0')}-${i.toString().padStart(2, '0')}`;
-      days.push(renderDay(date));
+  }
+  async function remove(id){
+    try{
+      await db.remove(id)
+      list()
+    }catch(error){
+        console.log(error)
     }
-    return days;
-  };
+  }
 
-  const saveTask = () => {
-    setMonthData((prevData) => ({
-      ...prevData,
-      [selectedDate]: [...(prevData[selectedDate] || []), { notes: taskText, color: '#FFD700' }],
-    }));
-    setIsModalVisible(false);
-    setTaskText('');
-  };
-
-  const renderSelectedDateDetails = () => {
-    const dayData = monthData[selectedDate] || [];
-    return (
-      <View style={styles.details}>
-        <Text style={styles.detailsText}>Detalhes para {selectedDate}</Text>
-        {dayData.map((task, index) => (
-          <Text key={index} style={styles.detailsText}>Notas: {task.notes}</Text>
-        ))}
-      </View>
-    );
-  };
-
-  const goToPreviousMonth = () => {
-    if (currentMonth === 0) {
-      setCurrentMonth(11);
-      setCurrentYear(currentYear - 1);
-    } else {
-      setCurrentMonth(currentMonth - 1);
-    }
-  };
-
-  const goToNextMonth = () => {
-    if (currentMonth === 11) {
-      setCurrentMonth(0);
-      setCurrentYear(currentYear + 1);
-    } else {
-      setCurrentMonth(currentMonth + 1);
-    }
-  };
+    useEffect(() => {
+    list();
+  }, [selectedDate, selectedTaskOption]);
 
   return (
-    <ScrollView contentContainerStyle={styles.container}>
-      <View style={styles.navbar}>
-        <Ionicons name="notifications-outline" size={24} color="white" />
-        <Text style={styles.navbarTitle}>Calendário</Text>
-        <Ionicons name="menu-outline" size={24} color="white" />
+    <View style={{ flex: 1 }}>
+      <View style={styles.header}>
+        <Icon name="notifications-outline" size={24} color="#fff" />
+        <Text style={styles.headerText}>Calendário</Text>
+        <Icon name="ellipsis-vertical-outline" size={24} color="#fff" />
       </View>
-
-      <View style={styles.menu}>
-        <TouchableOpacity
-          style={[styles.menuItem, viewType === 'treino' && styles.selectedMenuItem]}
-          onPress={() => setViewType('treino')}
-        >
-          <Text style={styles.menuText}>Treino</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={[styles.menuItem, viewType === 'dieta' && styles.selectedMenuItem]}
-          onPress={() => setViewType('dieta')}
-        >
-          <Text style={styles.menuText}>Dieta</Text>
-        </TouchableOpacity>
-      </View>
-
-      <View style={styles.calendarNav}>
-        <TouchableOpacity onPress={goToPreviousMonth}>
-          <Text style={styles.navText}>{"<"}</Text>
-        </TouchableOpacity>
-        <Text style={styles.navText}>
-          {new Date(currentYear, currentMonth).toLocaleString('default', { month: 'long' })} {currentYear}
-        </Text>
-        <TouchableOpacity onPress={goToNextMonth}>
-          <Text style={styles.navText}>{">"}</Text>
-        </TouchableOpacity>
-      </View>
-
-      <View style={styles.calendar}>{renderCalendar()}</View>
-      {selectedDate && renderSelectedDateDetails()}
-
-      <Modal visible={isModalVisible} animationType="slide">
-        <View style={styles.modalContainer}>
-          <Text style={styles.modalTitle}>Adicionar Tarefa para {selectedDate}</Text>
-          <TextInput
-            style={styles.textInput}
-            placeholder="Digite a tarefa"
-            value={taskText}
-            onChangeText={setTaskText}
-          />
-          <Button title="Salvar" onPress={saveTask} />
-          <Button title="Cancelar" onPress={() => setIsModalVisible(false)} />
+      <Calendar
+        onDayPress={day => {
+          setSelectedDate(day.dateString);
+        }}
+        markedDates={{
+          [selectedDate]: {selected: true, disableTouchEvent: true, selectedDotColor: 'orange'}
+        }}
+        monthFormat={'MMMM yyyy'}
+        hideExtraDays={true}
+        firstDay={1}
+        locale={'pt-br'}
+        theme={{
+          todayTextColor: '#00adf5',
+          arrowColor: 'orange',
+          monthTextColor: 'blue',
+          indicatorColor: 'blue',
+          textDayFontWeight: '300',
+          textMonthFontWeight: 'bold',
+          textDayHeaderFontWeight: '500',
+          textDayFontSize: 16,
+          textMonthFontSize: 16,
+          textDayHeaderFontSize: 16
+        }}
+      />
+      <TaskOptions selected={selectedTaskOption} setSelected={setSelectedTaskOption} list={list}/>
+      
+      {tasks.length === 0 ? (
+        <View style={styles.noTasksContainer}>
+          <Text style={styles.noTasksText}>Não há atividades nesse dia</Text>
         </View>
-      </Modal>
-    </ScrollView>
+      ) : (
+        <View style={styles.tasksContainer}>
+          <FlatList
+            data={tasks}
+            renderItem={({ item }) => (
+              <TaskComponent taskDate={item.task_date} taskType={item.task_type} onDelete={()=> remove(item.id)}/>
+            )}
+            keyExtractor={item => item.id}
+          />
+        </View>
+      )}
+    </View>
+    
   );
-};
+}
 
 const styles = StyleSheet.create({
-  container: {
-    flexGrow: 1,
-    backgroundColor: '#121212',
-  },
-  navbar: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    padding: 15,
-    backgroundColor: '#1F1F1F',
-  },
-  navbarTitle: {
-    fontSize: 20,
-    color: 'white',
-  },
-  menu: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    paddingVertical: 10,
-  },
-  menuItem: {
-    paddingHorizontal: 20,
-    paddingVertical: 10,
-    borderRadius: 5,
-    marginHorizontal: 5,
-  },
-  selectedMenuItem: {
-    backgroundColor: '#444',
-  },
-  menuText: {
-    color: 'white',
-    fontSize: 16,
-  },
-  calendarNav: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    paddingHorizontal: 20,
-    marginTop: 20,
-  },
-  navText: {
-    color: 'white',
-    fontSize: 18,
-  },
-  calendar: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    marginHorizontal: 10,
-  },
-  day: {
-    width: '14.28%',
-    aspectRatio: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderWidth: 1,
-    borderColor: '#333',
-    margin: 1,
-  },
-  dayText: {
-    color: 'white',
-  },
-  dayNotes: {
-    marginTop: 5,
-    color: 'white',
-    padding: 2,
-    borderRadius: 3,
-  },
-  details: {
-    marginTop: 20,
-    padding: 10,
-    backgroundColor: '#333',
-    borderRadius: 5,
-  },
-  detailsText: {
-    color: 'white',
-    fontSize: 16,
-  },
-  modalContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+  header: {
+    height: 60,
     backgroundColor: '#000',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingHorizontal: 15,
   },
-  modalTitle: {
-    fontSize: 20,
-    color: 'white',
-    marginBottom: 20,
+  headerText: {
+    color: '#fff',
+    fontSize: 18,
+    fontWeight: 'bold',
   },
-  textInput: {
-    width: '80%',
-    padding: 10,
-    borderWidth: 1,
-    borderColor: '#444',
-    borderRadius: 5,
-    color: 'white',
-    backgroundColor: '#222',
-    marginBottom: 20,
+  tasksContainer:{
+    marginVertical: 10
   },
+  noTasksContainer:{
+    marginVertical: 20,
+    alignItems: "center"
+  },
+  noTasksText:{
+    fontSize: 16,
+    fontWeight: "500"
+  }
 });
-
-export default MyCalendarApp;
-

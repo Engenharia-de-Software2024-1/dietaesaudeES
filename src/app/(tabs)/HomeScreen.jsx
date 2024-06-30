@@ -22,18 +22,14 @@ const HomeScreen = () => {
     const [dayValue, setDayValue] = useState(null);
     const [monthValue, setMonthValue] = useState(month);
     const [yearValue, setYearValue] = useState(null);
-
+    
+    const teste = {
+        seleciona: 'dieta',
+        mes: '01',
+        dia: null
+    }
     const db = useTasksDatabase()
 
-    async function list(){
-        try{
-            const response = await db.findAllTasks(selectedRadio)
-            console.log([dayValue, monthValue,yearValue])
-            setTasks(response)
-        }catch(error){
-            console.log(error)
-        }
-    }
 
     return (
         <View style={styles.container}>
@@ -41,8 +37,7 @@ const HomeScreen = () => {
 
             <TaskOptions 
             selected={selectedRadio} 
-            setSelected={setSelectedRadio} 
-            onPress={list}/>
+            setSelected={setSelectedRadio} />
 
             <View style={styles.addTaskContainer}>
                 <Link href='SetUpScreen'> 

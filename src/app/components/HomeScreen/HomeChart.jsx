@@ -5,7 +5,6 @@ import { useTasksDatabase } from "../../../database/useTasksDatabase";
 
 export default HomeChart = (props) => {
 
-    const dados = [{label: '30/09', value: 7,},{label: '10/09', value: 1}, {label: '03/09', value: 5}]
     const [data, setData] = useState([]);
     const db = useTasksDatabase();
     
@@ -30,6 +29,6 @@ export default HomeChart = (props) => {
     },[props.selectedFilter,props.taskMonth,props.taskDay])
     
 
-    return <LineChart data={data} color1={'#98c1d9'} dataPointsColor1="#3d5a80" color2={'green'} data2={dados} width={250} curved isAnimated />;
+    return <LineChart data={data} color1={'#98c1d9'} dataPointsColor1="#3d5a80" color2={'green'} width={250} curved isAnimated />
 
 };
