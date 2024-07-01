@@ -30,4 +30,5 @@ A problemática deste projeto, gira em torno da falta de um aplicativo que permi
 * Profissional de Educação Física.
 
 **Requisitos funcionais do produto:**
+*Cadastro de usuário: O aplicativo deve permitir o registro de novos usuários, incluindo nome, e-mail, idade, sexo, peso corporal e objetivos pessoais (expectativas)
 
