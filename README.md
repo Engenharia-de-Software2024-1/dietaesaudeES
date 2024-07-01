@@ -42,6 +42,13 @@ A problemática deste projeto, gira em torno da falta de um aplicativo que permi
 
 **Requisitos funcionais do produto:**
 
-*Cadastro de usuário: 
+* **Cadastro de usuário:** 
 O aplicativo deve permitir o registro de novos usuários, incluindo nome, e-mail, idade, sexo, peso corporal e objetivos pessoais (expectativas)
+
+* **Cadastro de atividade:** 
+  * O usuário deve poder cadastrar novas atividades ou rotinas através de uma tela de cadastro, contendo informações como data início, tipo de atividade, dias da semana e frequência da atividade.
+  * O usuário deve poder selecionar entre uma atividade personalizada ou uma atividade sugerida na tela inicial do aplicativo.
+
+* **Sugestão de atividade:**
+A tela inicial deve exibir 5 opções de atividades sugeridas para o usuário escolher e iniciar imediatamente.
 
