@@ -2,6 +2,17 @@
 
 NuTraining
 
+Lista de possíveis nomes:
+KeepUp
+Go
+Fit Goals
+Fit Tracker
+Health Tracker
+Health Goals
+Quick Tracker
+Quick Goals
+
+
 **Introdução:**
 
 Cuidar da saúde tornou-se uma prioridade essencial em um mundo cada vez mais acelerado e repleto de compromissos. Com o aumento das doenças relacionadas ao estilo de vida, como obesidade, diabetes e hipertensão, manter uma alimentação balanceada e uma rotina de exercícios físicos não é apenas uma questão estética, mas uma necessidade para garantir bem-estar e longevidade. Nesse contexto, a tecnologia tem se mostrado uma aliada poderosa, especialmente através de aplicativos que mapeiam a dieta e os treinos, oferecendo feedback contínuo sobre o progresso. Estes aplicativos ajudam a definir objetivos claros e tangíveis, assegurando que a jornada rumo a uma vida mais saudável seja estruturada e focada.
