@@ -52,3 +52,10 @@ O aplicativo deve permitir o registro de novos usuários, incluindo nome, e-mail
 * **Sugestão de atividade:**
 A tela inicial deve exibir 5 opções de atividades sugeridas para o usuário escolher e iniciar imediatamente.
 
+* **Registro de Conclusão de atividades:**
+* O usuário deve marcar as atividades como concluídas no dia correto.
+* O sistema não deve permitir marcar uma atividade como concluída em dias anteriores.
+
+*  **Progresso e Estatísticas:**
+*  O usuário deve poder acompanhar seu progresso e desenvolvimento das atividades através de gráficos e estatísticas.
+
