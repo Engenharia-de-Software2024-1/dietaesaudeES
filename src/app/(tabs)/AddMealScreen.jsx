@@ -1,12 +1,10 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
 
-const AddActivityScreen = () => {
-  const [selectedTime, setSelectedTime] = useState([]);
-  const [selectedActivity, setSelectedActivity] = useState([]);
+const AddMealScreen = () => {
+  const [selectedMeal, setSelectedMeal] = useState([]);
 
-  const times = ['Manhã', 'Tarde', 'Noite'];
-  const activities = ['Cardio', 'Treino de Força', 'Corrida', 'Ciclismo', 'Natação', 'Pilates'];
+  const meals = ['Café da Manhã', 'Almoço', 'Jantar', 'Lanche', 'Ceia'];
 
   const toggleSelection = (item, list, setList) => {
     setList((prev) =>
@@ -27,39 +25,23 @@ const AddActivityScreen = () => {
           <Text style={styles.headerButtonText}>DIETA</Text>
         </TouchableOpacity>
       </View>
-      <Text style={styles.title}>Detalhes da Atividade</Text>
-      <Text style={styles.label}>Horário da Atividade:</Text>
-      <View style={styles.selectionContainer}>
-        {times.map((time) => (
-          <TouchableOpacity
-            key={time}
-            style={[
-              styles.selectionButton,
-              selectedTime.includes(time) && styles.selectedButton
-            ]}
-            onPress={() => toggleSelection(time, selectedTime, setSelectedTime)}
-          >
-            <Text style={styles.selectionButtonText}>{time}</Text>
-          </TouchableOpacity>
-        ))}
-        <TextInput style={styles.textInput} placeholder="Outro:" />
-      </View>
+      <Text style={styles.title}>Detalhes da Refeição</Text>
       <Text style={styles.label}>Tipo da Atividade:</Text>
       <View style={styles.selectionContainer}>
-        {activities.map((activity) => (
+        {meals.map((meal) => (
           <TouchableOpacity
-            key={activity}
+            key={meal}
             style={[
               styles.selectionButton,
-              selectedActivity.includes(activity) && styles.selectedButton
+              selectedMeal.includes(meal) && styles.selectedButton
             ]}
-            onPress={() => toggleSelection(activity, selectedActivity, setSelectedActivity)}
+            onPress={() => toggleSelection(meal, selectedMeal, setSelectedMeal)}
           >
-            <Text style={styles.selectionButtonText}>{activity}</Text>
+            <Text style={styles.selectionButtonText}>{meal}</Text>
           </TouchableOpacity>
         ))}
-        <TextInput style={styles.textInput} placeholder="Outro:" />
       </View>
+      <TextInput style={styles.textInput} placeholder="Outro:" />
       <TouchableOpacity style={styles.saveButton}>
         <Text style={styles.saveButtonText}>SALVAR</Text>
       </TouchableOpacity>
@@ -117,20 +99,20 @@ const styles = StyleSheet.create({
     backgroundColor: '#e6e6e6',
   },
   selectedButton: {
-    backgroundColor: '#4faaff',
+    backgroundColor: '#b3ffd9', // Verde claro
   },
   selectionButtonText: {
     color: '#000',
   },
   textInput: {
-    backgroundColor: '#b3d9ff', // Azul claro
+    backgroundColor: '#b3ffd9',
     padding: 8,
     borderRadius: 4,
-    marginVertical: 4,
+    marginVertical: 16,
     flex: 1,
   },
   saveButton: {
-    backgroundColor: '#4faaff',
+    backgroundColor: '#00b300', // Verde escuro
     padding: 16,
     alignItems: 'center',
     borderRadius: 8,
@@ -142,4 +124,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default AddActivityScreen;
+export default AddMealScreen;
