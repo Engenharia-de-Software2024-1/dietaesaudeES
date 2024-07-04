@@ -8,10 +8,8 @@ const AddActivityScreen = () => {
   const times = ['Manhã', 'Tarde', 'Noite'];
   const activities = ['Cardio', 'Treino de Força', 'Corrida', 'Ciclismo', 'Natação', 'Pilates'];
 
-  const toggleSelection = (item, list, setList) => {
-    setList((prev) =>
-      prev.includes(item) ? prev.filter((i) => i !== item) : [...prev, item]
-    );
+  const selectItem = (item, setItem) => {
+    setItem(item)
   };
 
   return (
@@ -29,7 +27,7 @@ const AddActivityScreen = () => {
               styles.selectionButton,
               selectedTime.includes(time) && styles.selectedButton
             ]}
-            onPress={() => toggleSelection(time, selectedTime, setSelectedTime)}
+            onPress={() => selectItem(time, setSelectedTime)}
           >
             <Text style={styles.selectionButtonText}>{time}</Text>
           </TouchableOpacity>
@@ -45,7 +43,7 @@ const AddActivityScreen = () => {
               styles.selectionButton,
               selectedActivity.includes(activity) && styles.selectedButton
             ]}
-            onPress={() => toggleSelection(activity, selectedActivity, setSelectedActivity)}
+            onPress={() => selectItem(activity, setSelectedActivity)}
           >
             <Text style={styles.selectionButtonText}>{activity}</Text>
           </TouchableOpacity>

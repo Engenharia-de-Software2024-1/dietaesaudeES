@@ -1,4 +1,4 @@
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { StyleSheet, Text, View } from 'react-native'
 import React, { useState } from 'react'
 import { useTasksDatabase } from '../../database/useTasksDatabase';
 import AntDesign from '@expo/vector-icons/AntDesign';
@@ -18,17 +18,10 @@ const HomeScreen = () => {
         return month;
       };
     
-    const [selectedRadio, setSelectedRadio] = useState('dieta');
+    const [selectedRadio, setSelectedRadio] = useState('meals');
     const [dayValue, setDayValue] = useState(null);
     const [monthValue, setMonthValue] = useState(month);
     const [yearValue, setYearValue] = useState(null);
-    
-    const teste = {
-        seleciona: 'dieta',
-        mes: '01',
-        dia: null
-    }
-    const db = useTasksDatabase()
 
 
     return (

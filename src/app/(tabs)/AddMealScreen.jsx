@@ -1,16 +1,28 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
+import { useTasksDatabase } from '../../database/useTasksDatabase';
 
 const AddMealScreen = () => {
   const [selectedMeal, setSelectedMeal] = useState([]);
 
   const meals = ['Café da Manhã', 'Almoço', 'Jantar', 'Lanche', 'Ceia'];
 
-  const toggleSelection = (item, list, setList) => {
-    setList((prev) =>
-      prev.includes(item) ? prev.filter((i) => i !== item) : [...prev, item]
-    );
-  };
+  const db = useTasksDatabase();
+
+  function getCurrentDate() {
+    const date = new Date();
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are zero-based
+    const day = String(date.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+  }  
+
+  async function createMeal(){
+    const currentDate = getCurrentDate();
+    const response = await db.createMeal({
+      daytime: selectedMeal,
+      date: currentDate})
+  }
 
   return (
     <ScrollView style={styles.container}>
@@ -27,14 +39,14 @@ const AddMealScreen = () => {
               styles.selectionButton,
               selectedMeal.includes(meal) && styles.selectedButton
             ]}
-            onPress={() => toggleSelection(meal, selectedMeal, setSelectedMeal)}
+            onPress={() => setSelectedMeal(meal)}
           >
             <Text style={styles.selectionButtonText}>{meal}</Text>
           </TouchableOpacity>
         ))}
       </View>
       <TextInput style={styles.textInput} placeholder="Outro:" />
-      <TouchableOpacity style={styles.saveButton}>
+      <TouchableOpacity style={styles.saveButton} onPress={createMeal}>
         <Text style={styles.saveButtonText}>SALVAR</Text>
       </TouchableOpacity>
     </ScrollView>

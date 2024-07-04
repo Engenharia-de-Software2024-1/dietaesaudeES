@@ -11,10 +11,15 @@ export default HomeChart = (props) => {
     
     async function list(){
         try{
-            const response = await db.findAllTasks(props.selectedFilter, props.taskMonth,props.taskDay)
-            console.log(response)
 
-            const formattedResponse = response.map( item=>({
+             let response;
+            if(props.selectedFilter =='meals'){
+                response = await db.findAllMeals( props.taskMonth,props.taskDay)
+            }else{
+                response = await db.findAllWorkouts( props.taskMonth,props.taskDay)
+            }
+            
+            const  formattedResponse = response.map( item=>({
                 value: item.value,
                 label: `${item.day}/${item.month}`
             }));

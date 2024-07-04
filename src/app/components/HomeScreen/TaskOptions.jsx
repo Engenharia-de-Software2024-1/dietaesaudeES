@@ -8,11 +8,11 @@ export default function TaskOptions({selected, setSelected, list = null}) {
 
   return (
         <View style={styles.container}>
-            <TouchableOpacity onPress={() => {setSelected('dieta');list && list()}}>
-                <Text style={selected == 'dieta'? styles.selectedButton : styles.button}>Dieta</Text>
+            <TouchableOpacity onPress={() => {setSelected('meals');list && list()}}>
+                <Text style={selected == 'meals'? styles.selectedButton : styles.button}>Dieta</Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => {setSelected('treino');list && list()}}>
-                <Text style={selected == 'treino' ? styles.selectedButton : styles.button}>Treino</Text>
+            <TouchableOpacity onPress={() => {setSelected('workouts');list && list()}}>
+                <Text style={selected == 'workouts' ? styles.selectedButton : styles.button}>Treino</Text>
             </TouchableOpacity>
         </View>
   )

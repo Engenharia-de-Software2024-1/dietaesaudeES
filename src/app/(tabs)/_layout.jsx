@@ -1,5 +1,5 @@
 import FontAwesome from '@expo/vector-icons/FontAwesome';
-import { MaterialIcons } from '@expo/vector-icons';
+import { MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons';
 import { Tabs } from 'expo-router';
 
 export default function TabLayout() {
@@ -29,10 +29,17 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="SetUpScreen"
+        name="AddActivityScreen"
         options={{
             title: 'Adicionar atividade',
             tabBarIcon: ({ color }) => <MaterialIcons size={28} name="add-task" color={color} />,
+          }}
+      />
+      <Tabs.Screen
+        name="AddMealScreen"
+        options={{
+            title: 'Adicionar refeição',
+            tabBarIcon: ({ color }) => <MaterialCommunityIcons size={28} name="food-apple" color={color} />,
           }}
       />
       <Tabs.Screen
@@ -41,6 +48,12 @@ export default function TabLayout() {
           href: null
         }}
       />
+      <Tabs.Screen
+        name="SetUpScreen"
+        options={{
+          href: null
+        }}
+          />
       
     </Tabs>
   );

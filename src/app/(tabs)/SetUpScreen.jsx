@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, Button, TouchableOpacity, Switch, ScrollView, StyleSheet, Alert } from 'react-native';
+import Swiper from 'react-native-swiper'
 import { useTasksDatabase } from '../../database/useTasksDatabase';
 import { Link } from 'expo-router';
 
@@ -15,14 +16,24 @@ export default Page = () => {
   // funcoes do banco
   const db = useTasksDatabase();
 
+  const getDate =() => {
+    const date = new Date();
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+
+    return `${year}-${month}-${day}`;
+  }
+
   async function create(){
 
     try{
+      
       const response = await db.create({
         task_type: taskType, 
-        task_date: new Date().toLocaleDateString()
+        task_date: getDate()
       })
-
+      console.log(response)
       Alert.alert('Atividade adicionado')
     }catch(error){console.log(error)}
   }
@@ -180,4 +191,28 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     marginVertical: 4,
   },
+  wrapper: {},
+  slide1: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#000'
+  },
+  slide2: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#97CAE5'
+  },
+  slide3: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#92BBD9'
+  },
+  text: {
+    color: '#fff',
+    fontSize: 30,
+    fontWeight: 'bold'
+  }
 });

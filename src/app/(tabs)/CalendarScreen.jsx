@@ -8,7 +8,7 @@ import TaskComponent from '../components/CalendarScreen/taskComponent';
 
 export default function TrainingScreen() {
   const [selectedDate, setSelectedDate] = useState(new Date());
-  const [selectedTaskOption, setSelectedTaskOption] = useState('dieta')
+  const [selectedTaskOption, setSelectedTaskOption] = useState('meals')
   const [tasks, setTasks] = useState([])
 
   const db = useTasksDatabase();
@@ -35,10 +35,15 @@ export default function TrainingScreen() {
   };
   LocaleConfig.defaultLocale = 'pt';
 
-  
+  // pendente ajustar response para receber as refeições e criar a função de receber as refeicões em useTaskDatabase
   async function list(){
     try{
-        const response = await db.findEachTask(selectedTaskOption,selectedDate.toString())
+        var response;
+        if(selectedTaskOption == 'meals'){
+          response = []
+        }else{
+          response = await db.findEachWorkout(selectedDate.toString())
+        }
         setTasks(response)
     }catch(error){
         console.log(error)
@@ -99,7 +104,7 @@ export default function TrainingScreen() {
           <FlatList
             data={tasks}
             renderItem={({ item }) => (
-              <TaskComponent taskDate={item.task_date} taskType={item.task_type} onDelete={()=> remove(item.id)}/>
+              <TaskComponent taskDate={item.date} taskType={item.workout_type} taskDaytime={item.daytime} onDelete={()=> remove(item.id)}/>
             )}
             keyExtractor={item => item.id}
           />
@@ -125,7 +130,8 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   tasksContainer:{
-    marginVertical: 10
+    flex: 1,
+    backgroundColor: "black"
   },
   noTasksContainer:{
     marginVertical: 20,
