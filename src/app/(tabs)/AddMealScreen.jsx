@@ -17,16 +17,8 @@ const AddMealScreen = () => {
       <TouchableOpacity style={styles.backButton}>
         <Text>Voltar</Text>
       </TouchableOpacity>
-      <View style={styles.header}>
-        <TouchableOpacity style={styles.headerButton}>
-          <Text style={styles.headerButtonText}>TREINO</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={[styles.headerButton, styles.dietButton]}>
-          <Text style={styles.headerButtonText}>DIETA</Text>
-        </TouchableOpacity>
-      </View>
       <Text style={styles.title}>Detalhes da Refeição</Text>
-      <Text style={styles.label}>Tipo da Atividade:</Text>
+      <Text style={styles.label}>Horário da Refeição:</Text>
       <View style={styles.selectionContainer}>
         {meals.map((meal) => (
           <TouchableOpacity
