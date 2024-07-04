@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
+import { useTasksDatabase } from '../../database/useTasksDatabase';
 
 const AddActivityScreen = () => {
   const [selectedTime, setSelectedTime] = useState([]);
@@ -8,9 +9,28 @@ const AddActivityScreen = () => {
   const times = ['Manhã', 'Tarde', 'Noite'];
   const activities = ['Cardio', 'Treino de Força', 'Corrida', 'Ciclismo', 'Natação', 'Pilates'];
 
+  const db = useTasksDatabase();
+
+
   const selectItem = (item, setItem) => {
     setItem(item)
   };
+  function getCurrentDate() {
+    const date = new Date();
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are zero-based
+    const day = String(date.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+  }  
+
+  async function createWorkout(){
+    const currentDate = getCurrentDate();
+    await db.createWorkout({
+      date: currentDate,
+      workout_type: selectedActivity,
+      daytime: selectedTime
+    })
+  }
 
   return (
     <ScrollView style={styles.container}>
@@ -50,7 +70,7 @@ const AddActivityScreen = () => {
         ))}
         <TextInput style={styles.textInput} placeholder="Outro:" />
       </View>
-      <TouchableOpacity style={styles.saveButton}>
+      <TouchableOpacity style={styles.saveButton} onPress={createWorkout}>
         <Text style={styles.saveButtonText}>SALVAR</Text>
       </TouchableOpacity>
     </ScrollView>
