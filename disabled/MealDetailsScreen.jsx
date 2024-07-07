@@ -12,10 +12,10 @@ export default function MealDetailsScreen() {
         <Text style={styles.title}>Detalhes da Refeição</Text>
         <View style={styles.headerIcons}>
           <TouchableOpacity>
-            <Text style={styles.icon}>🔔</Text>
+             <FontAwesome name="bell" size={24} color="white" />
           </TouchableOpacity>
           <TouchableOpacity>
-            <Text style={styles.icon}>⋮</Text>
+            <MaterialIcons name="more-vert" size={28} color="white" />
           </TouchableOpacity>
         </View>
       </View>
