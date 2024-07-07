@@ -1,5 +1,6 @@
 import React from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
+import { View, Text, Button, TextInput, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
+import { MaterialIcons, FontAwesome } from '@expo/vector-icons';
 
 export default function MealDetailsScreen() {
   return (
