@@ -59,3 +59,6 @@ A tela inicial deve exibir 5 opções de atividades sugeridas para o usuário es
 *  **Progresso e Estatísticas:**
 *  O usuário deve poder acompanhar seu progresso e desenvolvimento das atividades através de gráficos e estatísticas.
 
+**Requisitos Não Funcionais:**
+
+* **Usabilidade:** O aplicativo deve ser fácil de usar, com uma interface intuitiva e amigável.
