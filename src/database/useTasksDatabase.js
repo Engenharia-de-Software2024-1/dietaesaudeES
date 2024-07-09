@@ -64,37 +64,58 @@ export function useTasksDatabase(){
         }
     }
 
-    async function findAllWorkouts(taskMonth, taskDay){
-        try{
-            const query = 
-            `SELECT strftime('%m', date) AS month, strftime('%d', date) AS day, strftime('%Y', date) AS year, COUNT(*) AS value
-            FROM workouts WHERE 
-            (? IS NULL OR strftime('%m', date) = ?)
-            AND (? IS NULL OR strftime('%d', date) = ?)
-            GROUP BY month, day;
-            `
-            const response = await database.getAllAsync(query,[ taskMonth,taskMonth, taskDay,taskDay])
-            return response
-        }catch(error){
-            throw error
+    async function findAllWorkouts(dayStart, dayEnd, monthStart, monthEnd, yearStart, yearEnd) {
+        try {
+            const query = `
+                SELECT strftime('%m', date) AS month, strftime('%d', date) AS day, strftime('%Y', date) AS year, COUNT(*) AS value
+                FROM workouts
+                WHERE 
+                    (? IS NULL OR strftime('%d', date) BETWEEN ? AND ?)
+                    AND (? IS NULL OR strftime('%m', date) BETWEEN ? AND ?)
+                    AND (? IS NULL OR strftime('%Y', date) BETWEEN ? AND ?)
+                GROUP BY month, day, year;
+            `;
+            const response = await database.getAllAsync(query, [
+                dayStart, dayStart, dayEnd,
+                monthStart, monthStart, monthEnd,
+                yearStart, yearStart, yearEnd
+            ]);
+            return response;
+        } catch (error) {
+            throw error;
         }
     }
+    
 
-    async function findAllMeals( taskMonth, taskDay){
-        try{
-            const query = 
-            `SELECT strftime('%m', date) AS month, strftime('%d', date) AS day,strftime('%Y', date) AS year, COUNT(*) AS value
-            FROM meals WHERE 
-            (? IS NULL OR strftime('%m', date) = ?)
-            AND (? IS NULL OR strftime('%d', date) = ?)
-            GROUP BY month, day;
-            `
-            const response = await database.getAllAsync(query,[ taskMonth,taskMonth, taskDay,taskDay])
-            return response
-        }catch(error){
-            throw error
+    async function findAllMeals(dayStart, dayEnd, monthStart, monthEnd, yearStart, yearEnd) {
+        try {
+            const query = `
+                SELECT strftime('%m', date) AS month, strftime('%d', date) AS day, strftime('%Y', date) AS year, COUNT(*) AS value
+                FROM meals
+                WHERE 
+                    (? IS NULL OR strftime('%d', date) >= ?)
+                    AND (? IS NULL OR strftime('%d', date) <= ?)
+                    AND (? IS NULL OR strftime('%m', date) >= ?)
+                    AND (? IS NULL OR strftime('%m', date) <= ?)
+                    AND (? IS NULL OR strftime('%Y', date) >= ?)
+                    AND (? IS NULL OR strftime('%Y', date) <= ?)
+                GROUP BY month, day, year;
+            `;
+            const response = await database.getAllAsync(query, [
+                dayStart, dayStart,
+                dayEnd, dayEnd,
+                monthStart, monthStart,
+                monthEnd, monthEnd,
+                yearStart, yearStart,
+                yearEnd, yearEnd
+            ]);
+            return response;
+        } catch (error) {
+            throw error;
         }
     }
+    
+    
 
     async function findEachWorkout(taskDate){
         try{

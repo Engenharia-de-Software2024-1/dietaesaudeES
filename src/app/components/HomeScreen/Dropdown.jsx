@@ -15,6 +15,7 @@ export default function Dropdown({data,placeholder, value, setValue}) {
                 setOpen={setOpen}
                 setValue={setValue}
                 setItems={setItems}
+                style={{ zIndex: open ? 1000 : 1 }}
                 placeholder={placeholder}
             />
         </View>
@@ -23,7 +24,7 @@ export default function Dropdown({data,placeholder, value, setValue}) {
 
 const styles = StyleSheet.create({
     dropdownContainer:{
-        width: 100,
+        width: 110,
         margin: 5,
     }
 })

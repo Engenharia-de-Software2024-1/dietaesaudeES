@@ -15,7 +15,6 @@ export default function MealComponent({taskDate, taskDaytime, onDelete}) {
   )
 }
 
-
 const styles = StyleSheet.create({
     container:{
         flexDirection: "row",

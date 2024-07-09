@@ -9,20 +9,14 @@ import TaskOptions from '../components/HomeScreen/TaskOptions';
 import { FontAwesome } from '@expo/vector-icons';
 
 const HomeScreen = () => {
-
-    const month = () => {
-        const date = new Date();
-        let month = (date.getMonth() + 1).toString();
-        if (month.length < 2) {
-          month = '0' + month;
-        }
-        return month;
-      };
     
     const [selectedRadio, setSelectedRadio] = useState('meals');
-    const [dayValue, setDayValue] = useState(null);
-    const [monthValue, setMonthValue] = useState(month);
-    const [yearValue, setYearValue] = useState(null);
+    const [dayStart, setDayStart] = useState(null);
+    const [dayEnd, setDayEnd] = useState(null);
+    const [monthStart, setMonthStart] = useState(null);
+    const [monthEnd, setMonthEnd] = useState(null);
+    const [yearStart, setYearStart] = useState(null);
+    const [yearEnd, setYearEnd] = useState(null);
     
     useFocusEffect(
         useCallback(() => {
@@ -40,25 +34,22 @@ const HomeScreen = () => {
     return (
         <View style={styles.container}>
             <Text style={styles.routineTitle}>Rotina</Text>
-
-            <TaskOptions 
+            <View style={styles.options}>
+            <TaskOptions
             selected={selectedRadio} 
             setSelected={setSelectedRadio} />
-
-            <View style={styles.addTaskContainer}>
-                <Link href='SetUpScreen'> 
-                    <AntDesign name='pluscircle' style={styles.addIcon}/>
-                </Link>
-                <Text style={styles.addTaskText}>Adicionar atividade / Criar uma meta</Text>
             </View>
 
-            <ChartFilters dayValue={dayValue} monthValue={monthValue} yearValue={yearValue} 
-                         setDay={setDayValue} setMonth={setMonthValue} setYear={setYearValue}/>
+            <ChartFilters dayStart={dayStart} setDayStart={setDayStart} dayEnd={dayEnd} setDayEnd={setDayEnd}
+                          monthStart={monthStart} setMonthStart={setMonthStart} monthEnd={monthEnd} setMonthEnd={setMonthEnd} 
+                          yearStart={yearStart} setYearStart={setYearStart} yearEnd={yearEnd} setYearEnd={setYearEnd}/>
 
             <View style={styles.chartContainer}>
-                <HomeChart 
+                <HomeChart
                 selectedFilter={selectedRadio} 
-                taskDay={dayValue} taskMonth={monthValue} 
+                dayStart={dayStart} setDayStart={setDayStart} dayEnd={dayEnd} setDayEnd={setDayEnd}
+                monthStart={monthStart} setMonthStart={monthStart} monthEnd={monthEnd} setMonthEnd={setMonthEnd} 
+                yearStart={yearStart} setYearStart={setYearStart} yearEnd={yearEnd} setYearEnd={setYearEnd}
                 style={styles.chart}/>
                 <View style={styles.legendContainer}>
                     <View style={styles.legendContent}>
@@ -70,6 +61,13 @@ const HomeScreen = () => {
                         <Text>Meta</Text>
                     </View>
                 </View>
+            </View>
+
+            <View style={styles.addTaskContainer}>
+                <Link href='SetGoalScreen'> 
+                    <AntDesign name='pluscircle' style={styles.addIcon}/>
+                </Link>
+                <Text style={styles.addTaskText}>Criar uma meta</Text>
             </View>
         </View>
         
@@ -93,8 +91,9 @@ const styles = StyleSheet.create({
     addTaskContainer:{
         flexDirection: "row",
         alignItems: "center",
-        justifyContent: "center",
-        margin: 10
+        justifyContent: "flex-start",
+        marginLeft: 20,
+        marginVertical: 10
     },
     addTaskText:{
         fontSize: 15,
@@ -118,5 +117,8 @@ const styles = StyleSheet.create({
     legendContent:{
         flexDirection: "row",
         alignItems: "center"
+    },
+    options:{
+        marginVertical: 20
     }
 });

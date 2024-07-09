@@ -2,7 +2,10 @@ import { useEffect, useState } from "react";
 import { LineChart } from "react-native-gifted-charts";
 import { useTasksDatabase } from "../../../database/useTasksDatabase";
 
-export default HomeChart = (props) => {
+export default HomeChart = ({dayStart,dayEnd,
+                            monthStart,monthEnd, 
+                            yearStart,yearEnd,
+                            selectedFilter}) => {
     const [data, setData] = useState([]);
     const [goalsChartData, setGoalsChartData] = useState([])
     let goals = new Map();
@@ -10,13 +13,10 @@ export default HomeChart = (props) => {
 
     // saber o dia da semana baseado na data
     const getDayOfWeek = (dateString) => {
-        console.log(dateString);
         const daysOfWeek = ['Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sábado', 'Domingo'];
         // Ensure the dateString is in YYYY-MM-DD format for correct parsing
         const date = new Date(dateString);
-        console.log(date)
         const dayIndex = date.getDay();
-        console.log(dayIndex)
         return daysOfWeek[dayIndex];
     };
 
@@ -24,14 +24,13 @@ export default HomeChart = (props) => {
         try {
             let response;
             let goalsData = [];
-            if (props.selectedFilter === 'meals') {
-                response = await db.findAllMeals(props.taskMonth, props.taskDay);
+            if (selectedFilter === 'meals') {
+                response = await db.findAllMeals(dayStart,dayEnd,monthStart,monthEnd,yearStart,yearEnd);
             } else {
-                response = await db.findAllWorkouts(props.taskMonth, props.taskDay);
+                response = await db.findAllWorkouts(dayStart,dayEnd,monthStart,monthEnd,yearStart,yearEnd);
             }
             const formattedResponse = response.map((item) => {
                 let day = getDayOfWeek(`${item.year}-${item.month}-${item.day}`)
-                console.log(day)
                 if(goals.has(day)){
                     goalsData.push({value: goals.get(day)})
                 }else{
@@ -42,7 +41,6 @@ export default HomeChart = (props) => {
             });
             setGoalsChartData(goalsData)
             setData(formattedResponse);
-            console.log(goalsChartData)
         } catch (error) {
             console.log(error);
         }
@@ -50,8 +48,7 @@ export default HomeChart = (props) => {
 
     const listGoals = async () => {
         try {
-            const response = await db.findGoals(props.selectedFilter)
-            console.log(response)
+            const response = await db.findGoals(selectedFilter)
             response.forEach(data => {
                 goals.set(data.day,Number(data.value))
             });
@@ -66,7 +63,7 @@ export default HomeChart = (props) => {
             await listActivities();
         };
         fetchData();
-    }, [props.selectedFilter, props.taskMonth, props.taskDay]);
+    }, [dayStart,dayEnd,monthStart,monthEnd,yearStart,yearEnd, selectedFilter]);
 
     return (
         <LineChart

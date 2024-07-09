@@ -45,8 +45,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="SetGoalScreen"
         options={{
-            title: 'Adicionar meta',
-            tabBarIcon: ({ color }) => <MaterialCommunityIcons size={28} name="food-apple" color={color} />,
+            href: null
           }}
       />
       <Tabs.Screen
@@ -55,13 +54,6 @@ export default function TabLayout() {
           href: null
         }}
       />
-      <Tabs.Screen
-        name="SetUpScreen"
-        options={{
-          href: null
-        }}
-          />
-      
     </Tabs>
   );
 }
