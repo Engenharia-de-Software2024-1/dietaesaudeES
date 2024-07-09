@@ -62,5 +62,6 @@ A tela inicial deve exibir 5 opções de atividades sugeridas para o usuário es
 **Requisitos Não Funcionais:**
 
 * **Usabilidade:** O aplicativo deve ser fácil de usar, com uma interface intuitiva e amigável;
+* **Desempenho:** O aplicativo deve ter um bom desempenho, com respostas rápidas às interações do usuário;
 * **Disponibilidade:** O aplicativo deve estar disponível para acesso quase contínuo, com um tempo mínimo de inatividade para manutenção e atualizações;
 * **Segurança:** O aplicativo deve garantir a privacidade dos dados dos usuários, e se necessário não pedir dados estritamente pessoais além dos necessários para a execução do objetivo;
