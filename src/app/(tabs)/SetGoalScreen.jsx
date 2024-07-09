@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, Button, StyleSheet, ScrollView, Switch } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, Button, StyleSheet, ScrollView, Switch, Alert } from 'react-native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import { useTasksDatabase } from '../../database/useTasksDatabase';
 
 export default function AddActivityScreen() {
-  const [selectedTab, setSelectedTab] = useState('Treino');
+  const [selectedTab, setSelectedTab] = useState('workouts');
   const [days, setDays] = useState([]);
   const [timesPerDay, setTimesPerDay] = useState(1);
   const [notification, setNotification] = useState(false);
+
+  const db = useTasksDatabase();
 
   const handleDayPress = (day) => {
     setDays((prevDays) =>
@@ -24,6 +27,20 @@ export default function AddActivityScreen() {
     setTimesPerDay((prev) => (prev > 1 ? prev - 1 : 1));
   };
 
+  async function createGoal(){
+    Alert.alert('Meta criada')
+    days.map(async (day)=>{
+      console.log(`${day} -- ${timesPerDay}`)
+      await db.createGoal({day: day, value:timesPerDay, goal_type: selectedTab})
+    })
+  }
+  async function showGoal(){
+    days.map(async (day)=>{
+      const response = await db.findGoals(selectedTab)
+      console.log(response)
+    })
+  }
+
   return (
     <View style={{ flex: 1 }}>
       <View style={styles.header}>
@@ -34,14 +51,14 @@ export default function AddActivityScreen() {
       <ScrollView contentContainerStyle={styles.container}>
         <View style={styles.toggleButtons}>
           <TouchableOpacity
-            style={[styles.toggleButton, selectedTab === 'Treino' && styles.selectedTab]}
-            onPress={() => setSelectedTab('Treino')}
+            style={[styles.toggleButton, selectedTab === 'workouts' && styles.selectedTab]}
+            onPress={() => setSelectedTab('workouts')}
           >
             <Text style={styles.toggleButtonText}>Treino</Text>
           </TouchableOpacity>
           <TouchableOpacity
-            style={[styles.toggleButton, selectedTab === 'Dieta' && styles.selectedTab]}
-            onPress={() => setSelectedTab('Dieta')}
+            style={[styles.toggleButton, selectedTab === 'meals' && styles.selectedTab]}
+            onPress={() => {setSelectedTab('meals'),showGoal()} }
           >
             <Text style={styles.toggleButtonText}>Dieta</Text>
           </TouchableOpacity>
@@ -54,7 +71,7 @@ export default function AddActivityScreen() {
         />
         <Text style={styles.label}>Quais dias da semana você pretende treinar?</Text>
         <View style={styles.daysContainer}>
-          {['Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sábado', 'Domingo'].map((day) => (
+          {['Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sabado', 'Domingo'].map((day) => (
             <TouchableOpacity
               key={day}
               style={[styles.dayButton, days.includes(day) && styles.selectedDay]}
@@ -81,7 +98,7 @@ export default function AddActivityScreen() {
             onValueChange={setNotification}
           />
         </View>
-        <TouchableOpacity style={styles.saveButton}>
+        <TouchableOpacity style={styles.saveButton} onPress={createGoal}>
           <Text style={styles.saveButtonText}>SALVAR</Text>
         </TouchableOpacity>
       </ScrollView>

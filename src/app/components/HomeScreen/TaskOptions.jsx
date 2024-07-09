@@ -2,16 +2,16 @@
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
 import React, { useEffect } from 'react'
 
-export default function TaskOptions({selected, setSelected, list = null}) {
+export default function TaskOptions({selected, setSelected}) {
 
 
 
   return (
         <View style={styles.container}>
-            <TouchableOpacity onPress={() => {setSelected('meals');list && list()}}>
+            <TouchableOpacity onPress={() => setSelected('meals')}>
                 <Text style={selected == 'meals'? styles.selectedButton : styles.button}>Dieta</Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => {setSelected('workouts');list && list()}}>
+            <TouchableOpacity onPress={() => setSelected('workouts')}>
                 <Text style={selected == 'workouts' ? styles.selectedButton : styles.button}>Treino</Text>
             </TouchableOpacity>
         </View>

@@ -43,18 +43,37 @@ export function useTasksDatabase(){
             await statement.finalizeAsync()
         }
     }
+    async function createGoal(data){
+        const statement = await database.prepareAsync(
+            "INSERT INTO goals(day, value, goal_type) VALUES ($day,$value,$goal_type)"
+        )
+        try{
+            const result = await statement.executeAsync({
+                $day: data.day,
+                $value: data.value,
+                $goal_type: data.goal_type
+            })
+
+            const insertedRowId = result.lastInsertRowId.toLocaleString()
+
+            return {insertedRowId}
+        }catch(error){
+            throw error
+        }finally{
+            await statement.finalizeAsync()
+        }
+    }
 
     async function findAllWorkouts(taskMonth, taskDay){
         try{
             const query = 
-            `SELECT strftime('%m', date) AS month, strftime('%d', date) AS day, COUNT(*) AS value
+            `SELECT strftime('%m', date) AS month, strftime('%d', date) AS day, strftime('%Y', date) AS year, COUNT(*) AS value
             FROM workouts WHERE 
             (? IS NULL OR strftime('%m', date) = ?)
             AND (? IS NULL OR strftime('%d', date) = ?)
             GROUP BY month, day;
             `
             const response = await database.getAllAsync(query,[ taskMonth,taskMonth, taskDay,taskDay])
-            console.log(response)
             return response
         }catch(error){
             throw error
@@ -64,14 +83,13 @@ export function useTasksDatabase(){
     async function findAllMeals( taskMonth, taskDay){
         try{
             const query = 
-            `SELECT strftime('%m', date) AS month, strftime('%d', date) AS day, COUNT(*) AS value
+            `SELECT strftime('%m', date) AS month, strftime('%d', date) AS day,strftime('%Y', date) AS year, COUNT(*) AS value
             FROM meals WHERE 
             (? IS NULL OR strftime('%m', date) = ?)
             AND (? IS NULL OR strftime('%d', date) = ?)
             GROUP BY month, day;
             `
             const response = await database.getAllAsync(query,[ taskMonth,taskMonth, taskDay,taskDay])
-            console.log(response)
             return response
         }catch(error){
             throw error
@@ -85,7 +103,6 @@ export function useTasksDatabase(){
              WHERE date = ?
             `
             const response = await database.getAllAsync(query,[taskDate])
-            console.log(response)
             return response
         }catch(error){
             throw error
@@ -99,12 +116,23 @@ export function useTasksDatabase(){
              WHERE date = ?
             `
             const response = await database.getAllAsync(query,[taskDate])
-            console.log(response)
             return response
         }catch(error){
             throw error
         }
     }
+    async function findGoals(goalType){
+        try{
+            const query = 
+            `SELECT day, value, goal_type FROM goals
+             WHERE goal_type = ?`
+            const response = await database.getAllAsync(query, [goalType])
+            return response
+        }catch(error){
+            throw error
+        }
+    }
+
 
     async function remove(id){
         try {
@@ -114,5 +142,5 @@ export function useTasksDatabase(){
         }
     }
 
-    return {createMeal, createWorkout, findAllMeals, findAllWorkouts, findEachMeal, findEachWorkout, remove}
+    return {createMeal, createWorkout, findAllMeals, findAllWorkouts, findEachMeal, findEachWorkout, remove, createGoal, findGoals}
 }

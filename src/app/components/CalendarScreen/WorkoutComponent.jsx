@@ -2,7 +2,7 @@ import { FontAwesome } from '@expo/vector-icons'
 import React from 'react'
 import { View, StyleSheet, TouchableOpacity, Text } from 'react-native'
 
-export default function TaskComponent({taskDate, taskType, taskDaytime, onDelete}) {
+export default function WorkoutComponent({taskDate, taskType, taskDaytime, onDelete}) {
     
   return (
     <View style={styles.container}>

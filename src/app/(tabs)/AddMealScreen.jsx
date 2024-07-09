@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, ScrollView, Alert } from 'react-native';
 import { useTasksDatabase } from '../../database/useTasksDatabase';
 
 const AddMealScreen = () => {
@@ -18,6 +18,7 @@ const AddMealScreen = () => {
   }  
 
   async function createMeal(){
+    Alert.alert('Refeição adicionada')
     const currentDate = getCurrentDate();
     const response = await db.createMeal({
       daytime: selectedMeal,

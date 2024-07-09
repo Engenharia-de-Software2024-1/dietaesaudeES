@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, ScrollView, Alert } from 'react-native';
 import { useTasksDatabase } from '../../database/useTasksDatabase';
 
 const AddActivityScreen = () => {
@@ -24,6 +24,7 @@ const AddActivityScreen = () => {
   }  
 
   async function createWorkout(){
+    Alert.alert('Treino adicionado')
     const currentDate = getCurrentDate();
     await db.createWorkout({
       date: currentDate,

@@ -4,7 +4,8 @@ import { Calendar, LocaleConfig } from 'react-native-calendars';
 import Icon from 'react-native-vector-icons/Ionicons';
 import TaskOptions from '../components/HomeScreen/TaskOptions';
 import { useTasksDatabase } from '../../database/useTasksDatabase';
-import TaskComponent from '../components/CalendarScreen/taskComponent';
+import WorkoutComponent from '../components/CalendarScreen/WorkoutComponent';
+import MealComponent from '../components/CalendarScreen/MealComponent';
 
 export default function TrainingScreen() {
   const [selectedDate, setSelectedDate] = useState(new Date());
@@ -35,12 +36,20 @@ export default function TrainingScreen() {
   };
   LocaleConfig.defaultLocale = 'pt';
 
-  // pendente ajustar response para receber as refeições e criar a função de receber as refeicões em useTaskDatabase
+  const renderTaskComponent = ({ item }) => {
+    if (selectedTaskOption === 'meals') {
+      return <MealComponent taskDate={item.date} taskDaytime={item.daytime} onDelete={() => remove(item.id)} />;
+    } else {
+      return <WorkoutComponent taskDate={item.date} taskType={item.workout_type} taskDaytime={item.daytime} onDelete={() => remove(item.id)} />;
+    }
+  };
+
+
   async function list(){
     try{
         var response;
         if(selectedTaskOption == 'meals'){
-          response = []
+          response = await db.findEachMeal(selectedDate.toString())
         }else{
           response = await db.findEachWorkout(selectedDate.toString())
         }
@@ -60,7 +69,7 @@ export default function TrainingScreen() {
 
     useEffect(() => {
     list();
-  }, [selectedDate, selectedTaskOption]);
+  }, [selectedTaskOption, selectedDate]);
 
   return (
     <View style={{ flex: 1 }}>
@@ -93,7 +102,7 @@ export default function TrainingScreen() {
           textDayHeaderFontSize: 16
         }}
       />
-      <TaskOptions selected={selectedTaskOption} setSelected={setSelectedTaskOption} list={list}/>
+      <TaskOptions selected={selectedTaskOption} setSelected={setSelectedTaskOption}/>
       
       {tasks.length === 0 ? (
         <View style={styles.noTasksContainer}>
@@ -103,9 +112,7 @@ export default function TrainingScreen() {
         <View style={styles.tasksContainer}>
           <FlatList
             data={tasks}
-            renderItem={({ item }) => (
-              <TaskComponent taskDate={item.date} taskType={item.workout_type} taskDaytime={item.daytime} onDelete={()=> remove(item.id)}/>
-            )}
+            renderItem={renderTaskComponent}
             keyExtractor={item => item.id}
           />
         </View>
