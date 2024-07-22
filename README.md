@@ -65,3 +65,16 @@ A tela inicial deve exibir 5 opções de atividades sugeridas para o usuário es
 * **Desempenho:** O aplicativo deve ter um bom desempenho, com respostas rápidas às interações do usuário;
 * **Disponibilidade:** O aplicativo deve estar disponível para acesso quase contínuo, com um tempo mínimo de inatividade para manutenção e atualizações;
 * **Segurança:** O aplicativo deve garantir a privacidade dos dados dos usuários, e se necessário não pedir dados estritamente pessoais além dos necessários para a execução do objetivo;
+
+**Papéis**
+Time de Gestão: 
+Bruna (Gerente de projeto/ Aprendiz em TI)
+Anicely (Gestão da Qualidade)
+Caio (Inteligência e Soluções)
+
+**Time de desenvolvimento:**
+Weslley (Lider Tech) - Desenvolvimento front e Back end
+Arthur (dev) - Desenvolvimento Back end  
+Gabriel Agra (dev) - Desenvolvimento front end  
+Gabriel Alves (dev) - Desenvolvimento Back e front end
+
