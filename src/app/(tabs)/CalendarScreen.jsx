@@ -73,6 +73,7 @@ export default function TrainingScreen() {
 
   return (
     <View style={{ flex: 1 }}>
+      <View style={styles.upperMargin}></View>
       <View style={styles.header}>
         <Icon name="notifications-outline" size={24} color="#fff" />
         <Text style={styles.headerText}>Calendário</Text>
@@ -125,11 +126,14 @@ export default function TrainingScreen() {
 const styles = StyleSheet.create({
   header: {
     height: 60,
-    backgroundColor: '#000',
+    backgroundColor: '#3c3c3c',
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
     paddingHorizontal: 15,
+  },
+  upperMargin: {
+    height: 35, // Margem superior
   },
   headerText: {
     color: '#fff',
@@ -138,7 +142,7 @@ const styles = StyleSheet.create({
   },
   tasksContainer:{
     flex: 1,
-    backgroundColor: "black"
+    backgroundColor: "#ffff"
   },
   noTasksContainer:{
     marginVertical: 20,
