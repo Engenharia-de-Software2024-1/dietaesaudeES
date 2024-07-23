@@ -6,7 +6,7 @@ export default function TabLayout() {
   return (
     <Tabs screenOptions={
       { 
-      tabBarActiveTintColor: '#5ca0ff', //Azul claro
+      tabBarActiveTintColor: '#5ca0ff', //Azul claro, trocar verde?
       tabBarInactiveTintColor:"#dedede", //Cinza Muito Claro
       headerShown: false,
       tabBarStyle:{
@@ -42,15 +42,15 @@ export default function TabLayout() {
             tabBarIcon: ({ color }) => <MaterialCommunityIcons size={28} name="food-apple" color={color} />,
           }}
       />
-      <Tabs.Screen
+      <Tabs.Screen //Terminar
         name="SetGoalScreen"
         options={{
-            href: null
+          href: null
           }}
       />
-      <Tabs.Screen
+      <Tabs.Screen //Terminar
         name="HomeScreen"
-        options={{
+        options={{          
           href: null
         }}
       />
