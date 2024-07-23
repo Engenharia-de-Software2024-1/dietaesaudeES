@@ -43,6 +43,7 @@ export default function AddActivityScreen() {
 
   return (
     <View style={{ flex: 1 }}>
+      <View style={styles.upperMargin}></View>
       <View style={styles.header}>
         <MaterialIcons name="notifications" size={24} color="#fff" style={styles.icon} />
         <Text style={styles.headerText}>Adicionar Atividade</Text>
@@ -109,11 +110,14 @@ export default function AddActivityScreen() {
 const styles = StyleSheet.create({
   header: {
     height: 60,
-    backgroundColor: '#121212',
+    backgroundColor: '#3c3c3c', // Cinza Muito Escuro
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
     paddingHorizontal: 15,
+  },
+  upperMargin: {
+    height: 35, // Margem superior
   },
   headerText: {
     color: '#fff',
@@ -134,11 +138,11 @@ const styles = StyleSheet.create({
     marginHorizontal: 10,
     paddingVertical: 10,
     paddingHorizontal: 20,
-    backgroundColor: 'gray',
+    backgroundColor: '#aaa', // Cinza escuro
     borderRadius: 5,
   },
   selectedTab: {
-    backgroundColor: 'blue',
+    backgroundColor: '#1e90ff', // Azul
   },
   toggleButtonText: {
     color: '#fff',
@@ -146,12 +150,12 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   input: {
-    borderColor: '#ccc',
+    borderColor: '#aaa', // Cinza escuro
     borderWidth: 1,
     borderRadius: 5,
     padding: 10,
     marginBottom: 20,
-    backgroundColor: '#f0f0f0',
+    backgroundColor: '#e6e6e6', // Cinza Claro
   },
   label: {
     fontSize: 16,
@@ -166,11 +170,11 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     paddingHorizontal: 20,
     margin: 5,
-    backgroundColor: 'gray',
+    backgroundColor: '#aaa', // Cinza escuro
     borderRadius: 5,
   },
   selectedDay: {
-    backgroundColor: 'blue',
+    backgroundColor: '#1e90ff', // Azul
   },
   dayButtonText: {
     color: '#fff',
@@ -186,7 +190,7 @@ const styles = StyleSheet.create({
     height: 40,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'blue',
+    backgroundColor: '#1e90ff', // Azul
     borderRadius: 5,
   },
   counterButtonText: {
@@ -203,7 +207,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   saveButton: {
-    backgroundColor: 'blue',
+    backgroundColor: '#1e90ff', // Azul
     paddingVertical: 15,
     alignItems: 'center',
     borderRadius: 5,

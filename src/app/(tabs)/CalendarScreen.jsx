@@ -126,7 +126,7 @@ export default function TrainingScreen() {
 const styles = StyleSheet.create({
   header: {
     height: 60,
-    backgroundColor: '#3c3c3c',
+    backgroundColor: '#3c3c3c', // Cinza Muito Escuro
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
