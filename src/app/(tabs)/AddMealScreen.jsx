@@ -17,19 +17,18 @@ const AddMealScreen = () => {
     return `${year}-${month}-${day}`;
   }  
 
-  async function createMeal(){
-    Alert.alert('Refeição adicionada')
+  async function createMeal() {
+    Alert.alert('Refeição adicionada');
     const currentDate = getCurrentDate();
     const response = await db.createMeal({
       daytime: selectedMeal,
-      date: currentDate})
+      date: currentDate
+    });
   }
 
   return (
     <ScrollView style={styles.container}>
-      <TouchableOpacity style={styles.backButton}>
-        <Text>Voltar</Text>
-      </TouchableOpacity>
+      <View style={styles.upperMargin}></View>
       <Text style={styles.title}>Detalhes da Refeição</Text>
       <Text style={styles.label}>Horário da Refeição:</Text>
       <View style={styles.selectionContainer}>
@@ -60,28 +59,8 @@ const styles = StyleSheet.create({
     padding: 16,
     backgroundColor: '#f2f2f2',
   },
-  backButton: {
-    marginBottom: 16,
-  },
-  header: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginBottom: 16,
-  },
-  headerButton: {
-    flex: 1,
-    backgroundColor: '#4faaff',
-    padding: 16,
-    margin: 8,
-    alignItems: 'center',
-    borderRadius: 8,
-  },
-  dietButton: {
-    backgroundColor: '#00b300',
-  },
-  headerButtonText: {
-    color: '#fff',
-    fontWeight: 'bold',
+  upperMargin: {
+    height: 40, // Margem superior
   },
   title: {
     fontSize: 24,
@@ -101,23 +80,23 @@ const styles = StyleSheet.create({
     padding: 10,
     margin: 4,
     borderRadius: 4,
-    backgroundColor: '#e6e6e6',
+    backgroundColor: '#aaa', //Cinza escuro
   },
   selectedButton: {
-    backgroundColor: '#b3ffd9', // Verde claro
+    backgroundColor: '#1e90ff', // Azul
   },
   selectionButtonText: {
     color: '#000',
   },
   textInput: {
-    backgroundColor: '#b3ffd9',
+    backgroundColor: '#e6e6e6', //Cinza Claro
     padding: 8,
     borderRadius: 4,
     marginVertical: 16,
     flex: 1,
   },
   saveButton: {
-    backgroundColor: '#00b300', // Verde escuro
+    backgroundColor: '#1e90ff', // Azul
     padding: 16,
     alignItems: 'center',
     borderRadius: 8,
