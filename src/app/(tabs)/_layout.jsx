@@ -7,7 +7,7 @@ export default function TabLayout() {
     <Tabs screenOptions={
       { 
       tabBarActiveTintColor: '#5ca0ff', //Azul claro
-      tabBarInactiveTintColor:"##dedede", //Cinza Muito Claro
+      tabBarInactiveTintColor:"#dedede", //Cinza Muito Claro
       headerShown: false,
       tabBarStyle:{
         backgroundColor: "#000",

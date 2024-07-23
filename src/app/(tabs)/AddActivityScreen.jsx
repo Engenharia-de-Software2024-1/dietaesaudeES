@@ -11,33 +11,31 @@ const AddActivityScreen = () => {
 
   const db = useTasksDatabase();
 
-
   const selectItem = (item, setItem) => {
-    setItem(item)
+    setItem(item);
   };
+
   function getCurrentDate() {
     const date = new Date();
     const year = date.getFullYear();
     const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are zero-based
     const day = String(date.getDate()).padStart(2, '0');
     return `${year}-${month}-${day}`;
-  }  
+  }
 
-  async function createWorkout(){
-    Alert.alert('Treino adicionado')
+  async function createWorkout() {
+    Alert.alert('Treino adicionado');
     const currentDate = getCurrentDate();
     await db.createWorkout({
       date: currentDate,
       workout_type: selectedActivity,
-      daytime: selectedTime
-    })
+      daytime: selectedTime,
+    });
   }
 
   return (
     <ScrollView style={styles.container}>
-      <TouchableOpacity style={styles.backButton}>
-        <Text>Voltar</Text>
-      </TouchableOpacity>
+      <View style={styles.upperMargin}></View>
       <Text style={styles.title}>Detalhes da Atividade</Text>
       <Text style={styles.label}>Horário da Atividade:</Text>
       <View style={styles.selectionContainer}>
@@ -46,15 +44,15 @@ const AddActivityScreen = () => {
             key={time}
             style={[
               styles.selectionButton,
-              selectedTime.includes(time) && styles.selectedButton
+              selectedTime.includes(time) && styles.selectedButton,
             ]}
             onPress={() => selectItem(time, setSelectedTime)}
           >
             <Text style={styles.selectionButtonText}>{time}</Text>
           </TouchableOpacity>
         ))}
-        <TextInput style={styles.textInput} placeholder="Outro:" />
       </View>
+      <TextInput style={styles.textInput} placeholder="Outro:" />
       <Text style={styles.label}>Tipo da Atividade:</Text>
       <View style={styles.selectionContainer}>
         {activities.map((activity) => (
@@ -62,15 +60,15 @@ const AddActivityScreen = () => {
             key={activity}
             style={[
               styles.selectionButton,
-              selectedActivity.includes(activity) && styles.selectedButton
+              selectedActivity.includes(activity) && styles.selectedButton,
             ]}
             onPress={() => selectItem(activity, setSelectedActivity)}
           >
             <Text style={styles.selectionButtonText}>{activity}</Text>
           </TouchableOpacity>
         ))}
-        <TextInput style={styles.textInput} placeholder="Outro:" />
       </View>
+      <TextInput style={[styles.textInput, styles.textInputSpacing]} placeholder="Outro:" />
       <TouchableOpacity style={styles.saveButton} onPress={createWorkout}>
         <Text style={styles.saveButtonText}>SALVAR</Text>
       </TouchableOpacity>
@@ -83,6 +81,9 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 16,
     backgroundColor: '#f2f2f2',
+  },
+  upperMargin: {
+    height: 40, // Margem superior
   },
   backButton: {
     marginBottom: 16,
@@ -125,23 +126,26 @@ const styles = StyleSheet.create({
     padding: 10,
     margin: 4,
     borderRadius: 4,
-    backgroundColor: '#e6e6e6',
+    backgroundColor: '#aaa', // Cinza escuro
   },
   selectedButton: {
-    backgroundColor: '#4faaff',
+    backgroundColor: '#1e90ff', // Azul
   },
   selectionButtonText: {
     color: '#000',
   },
   textInput: {
-    backgroundColor: '#b3d9ff', // Azul claro
+    backgroundColor: '#e6e6e6', // Cinza Claro
     padding: 8,
     borderRadius: 4,
     marginVertical: 4,
     flex: 1,
   },
+  textInputSpacing: {
+    marginBottom: 16, // Espaçamento
+  },
   saveButton: {
-    backgroundColor: '#4faaff',
+    backgroundColor: '#1e90ff', // Azul
     padding: 16,
     alignItems: 'center',
     borderRadius: 8,
