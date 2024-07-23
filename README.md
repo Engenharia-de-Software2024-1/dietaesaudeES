@@ -2,6 +2,7 @@
 
 NuTraining
 
+**Urgência**
 Lista de possíveis nomes:
 KeepUp
 Go
