@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Icon from 'react-native-vector-icons/Ionicons';
 import { View, Text, TextInput, TouchableOpacity, Button, StyleSheet, ScrollView, Switch, Alert } from 'react-native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { useTasksDatabase } from '../../database/useTasksDatabase';
@@ -45,9 +46,9 @@ export default function AddActivityScreen() {
     <View style={{ flex: 1 }}>
       <View style={styles.upperMargin}></View>
       <View style={styles.header}>
-        <MaterialIcons name="notifications" size={24} color="#fff" style={styles.icon} />
+        <Icon name="notifications-outline" size={24} color="#fff" />
         <Text style={styles.headerText}>Adicionar Meta</Text>
-        <MaterialIcons name="more-vert" size={24} color="#fff" style={styles.icon} />
+        <Icon name="ellipsis-vertical-outline" size={24} color="#fff" />
       </View>
       <ScrollView contentContainerStyle={styles.container}>
         <View style={styles.toggleButtons}>
@@ -70,7 +71,7 @@ export default function AddActivityScreen() {
           multiline
           numberOfLines={4}
         />
-        <Text style={styles.label}>Quais dias da semana você pretende treinar?</Text>
+        <Text style={styles.label}>Em quais dias da semana?</Text>
         <View style={styles.daysContainer}>
           {['Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sabado', 'Domingo'].map((day) => (
             <TouchableOpacity
@@ -82,7 +83,7 @@ export default function AddActivityScreen() {
             </TouchableOpacity>
           ))}
         </View>
-        <Text style={styles.label}>Quantas vezes ao dia a atividade será realizada?</Text>
+        <Text style={styles.label}>Quantas vezes ao dia?</Text>
         <View style={styles.counterContainer}>
           <TouchableOpacity onPress={handleDecrement} style={styles.counterButton}>
             <Text style={styles.counterButtonText}>-</Text>

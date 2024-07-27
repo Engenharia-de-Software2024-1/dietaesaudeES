@@ -39,7 +39,6 @@ const HomeScreen = () => {
                 />
                 <Icon name="ellipsis-vertical-outline" size={24} color="#fff" />
             </View>
-            <Text></Text>
             <View style={styles.options}>
                 <TaskOptions
                     selected={selectedRadio}
@@ -98,7 +97,7 @@ const styles = StyleSheet.create({
         resizeMode: 'contain',
     },
     container: {
-        backgroundColor: "#F5F5F5",
+        backgroundColor: "#fff",
         flex: 1,
     },
     routineTitle: {
