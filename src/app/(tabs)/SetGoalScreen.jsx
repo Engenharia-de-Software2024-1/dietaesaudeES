@@ -46,7 +46,7 @@ export default function AddActivityScreen() {
       <View style={styles.upperMargin}></View>
       <View style={styles.header}>
         <MaterialIcons name="notifications" size={24} color="#fff" style={styles.icon} />
-        <Text style={styles.headerText}>Adicionar Atividade</Text>
+        <Text style={styles.headerText}>Adicionar Meta</Text>
         <MaterialIcons name="more-vert" size={24} color="#fff" style={styles.icon} />
       </View>
       <ScrollView contentContainerStyle={styles.container}>
