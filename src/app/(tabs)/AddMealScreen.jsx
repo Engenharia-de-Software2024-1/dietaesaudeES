@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Icon from 'react-native-vector-icons/Ionicons';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, ScrollView, Alert } from 'react-native';
 import { useTasksDatabase } from '../../database/useTasksDatabase';
 
@@ -29,7 +30,12 @@ const AddMealScreen = () => {
   return (
     <ScrollView style={styles.container}>
       <View style={styles.upperMargin}></View>
-      <Text style={styles.title}>Detalhes da Refeição</Text>
+      <View style={styles.topbar}>
+        <Icon name="notifications-outline" size={24} color="#fff" />
+        <Text style={styles.topbarText}>Detalhes da Refeição</Text>
+        <Icon name="ellipsis-vertical-outline" size={24} color="#fff" />
+      </View>
+      <Text></Text>
       <Text style={styles.label}>Horário da Refeição:</Text>
       <View style={styles.selectionContainer}>
         {meals.map((meal) => (
@@ -54,20 +60,30 @@ const AddMealScreen = () => {
 };
 
 const styles = StyleSheet.create({
+  topbar: {
+    height: 60,
+    backgroundColor: '#3c3c3c', // Cinza Muito Escuro
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingHorizontal: 15,
+    marginHorizontal: -16,
+  },
+  topbarText: {
+    color: '#fff',
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
   container: {
     flex: 1,
     padding: 16,
     backgroundColor: '#f2f2f2',
   },
   upperMargin: {
-    height: 40, // Margem superior
-  },
-  title: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    marginBottom: 16,
+    height: 19, // Margem superior
   },
   label: {
+    fontSize: 18,
     marginVertical: 8,
     fontWeight: 'bold',
   },
