@@ -20,7 +20,9 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         justifyContent: "space-around",
         backgroundColor: "#3c3c3c",
+        margin: 5,
         padding: 15,
+        borderRadius: 10
     },
     text:{
         color: "white"
