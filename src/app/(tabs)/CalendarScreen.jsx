@@ -60,7 +60,7 @@ export default function TrainingScreen() {
   }
   async function remove(id){
     try{
-      await db.remove(id)
+      await db.remove(id,selectedTaskOption)
       list()
     }catch(error){
         console.log(error)

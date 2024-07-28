@@ -155,9 +155,9 @@ export function useTasksDatabase(){
     }
 
 
-    async function remove(id){
+    async function remove(id,table){
         try {
-            await database.execAsync("DELETE FROM tasks WHERE id = " + id)
+            await database.execAsync("DELETE FROM " + table  + " WHERE id = " + id)
         } catch (error) {
             throw error
         }

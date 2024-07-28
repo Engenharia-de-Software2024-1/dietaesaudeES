@@ -9,7 +9,7 @@ export default function MealComponent({taskDate, taskDaytime, onDelete}) {
         <Text style={styles.text}>{taskDate}</Text>
         <Text style={styles.text}>{taskDaytime}</Text>
         <TouchableOpacity onPress={onDelete}>
-            <FontAwesome name='trash' size={24} color={"red"}/>
+            <FontAwesome name='trash' size={30} color={"red"}/>
         </TouchableOpacity>
     </View>
   )

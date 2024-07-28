@@ -10,7 +10,7 @@ export default function WorkoutComponent({taskDate, taskType, taskDaytime, onDel
         <Text style={styles.text}>{taskType}</Text>
         <Text style={styles.text}>{taskDaytime}</Text>
         <TouchableOpacity onPress={onDelete}>
-            <FontAwesome name='trash' size={24} color={"red"}/>
+            <FontAwesome name='trash' size={28} color={"red"}/>
         </TouchableOpacity>
     </View>
   )
